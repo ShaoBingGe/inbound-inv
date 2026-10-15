@@ -64,6 +64,28 @@
 | POST | `/v1/supplier-wallet/invoices/{no}/rematch` | 业务 API |
 | GET | `/v1/supplier-wallet/overview` | 业务 API |
 
+### 三单匹配 / 应付单 / 药品匹配关系（`src/features/supplier-wallet/match/api.ts`）
+
+查询都带国家（数据驻留）；过滤上下文（时间区间、购买入库组织、供应商）作为查询参数，前端不做本地过滤。
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| GET | `/v1/supplier-wallet/countries/{country}/match/board?range&buyer&supplier` | 概览指标、匹配组、匹配中（手工新增）、容差规则 |
+| GET | `/v1/supplier-wallet/countries/{country}/match/run` | 匹配引擎批处理状态（前端轮询；可改 SSE） |
+| POST | `/v1/supplier-wallet/countries/{country}/match/run` | 重新同步税务发票并重跑匹配 |
+| GET | `/v1/supplier-wallet/countries/{country}/match/pool` | 新增匹配组可选的发票 / 入库单 |
+| GET | `/v1/supplier-wallet/countries/{country}/match/pending?kind=inv\|inb` | 未匹配发票 / 待匹配入库单明细（含入库余额） |
+| POST | `/v1/supplier-wallet/countries/{country}/match/groups` | 新增匹配组 `{inv, inb, source}`，进入匹配中 |
+| PUT | `/v1/supplier-wallet/match-groups/{mg}/strategy` | 调整策略（版本化、可审计）并单组重跑 |
+| POST | `/v1/supplier-wallet/match-groups/confirm` | 确认匹配 `{groups}`，幂等，生成应付单 |
+| GET | `/v1/supplier-wallet/match-groups/{mg}/workbench` | 手工匹配工作台：发票行、入库行（余额）、候选单据、连线、差额单 |
+| PUT | `/v1/supplier-wallet/match-groups/{mg}/workbench` | 保存连线 `{invoices, inbounds, links}`，重算行占用与组匹配率 |
+| POST | `/v1/supplier-wallet/match-groups/{mg}/adjustments` | 按行生成差额单 `{rows: [{lid, type}]}` |
+| POST | `/v1/supplier-wallet/match-groups/{mg}/push` | 下推应付单，匹配组锁定 |
+| DELETE | `/v1/supplier-wallet/match-groups/{mg}` | 删除匹配组，明细行回到未匹配池 |
+| GET | `/v1/supplier-wallet/countries/{country}/payables` | 应付单查询（只读） |
+| GET | `/v1/supplier-wallet/countries/{country}/drug-mapping` | 药品匹配关系知识库 |
+
 ## H5页面采集（`src/features/capture-h5`）
 
 | 方法 | 路径 | 后端 |

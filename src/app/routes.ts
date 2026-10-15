@@ -16,6 +16,11 @@ export const ROUTES = {
   /** 影像查看器：在新窗口打开，不带应用框架 */
   invoiceViewer: (id = ':invoiceId') => `/viewer/${id}`,
   supplierWallet: '/pool/supplier-wallet',
+  /** 供应商票夹内的视图：三单匹配 / 应付单 / 药品匹配关系 */
+  supplierWalletView: (view: 'match' | 'ap' | 'drugs', q?: string) =>
+    `/pool/supplier-wallet?view=${view}${q ? `&q=${encodeURIComponent(q)}` : ''}`,
+  /** 三单匹配 · 手工匹配工作台 */
+  matchWorkbench: (id = ':groupId') => `/pool/supplier-wallet/match/${id}`,
 
   captureH5: '/capture/h5',
   captureMailbox: '/capture/mailbox',
@@ -93,7 +98,12 @@ export const NAV: NavGroup[] = [
         icon: 'M4 7h16v13H4zM8 7V4h8v3M8 12h8M8 16h5',
         match: ['/pool/invoices/'],
       },
-      { to: ROUTES.supplierWallet, label: '供应商票夹', icon: 'M3 7h18v13H3zM3 7l2-4h14l2 4M16 13h2' },
+      {
+        to: ROUTES.supplierWallet,
+        label: '供应商票夹',
+        icon: 'M3 7h18v13H3zM3 7l2-4h14l2 4M16 13h2',
+        match: ['/pool/supplier-wallet/'],
+      },
     ],
   },
   {

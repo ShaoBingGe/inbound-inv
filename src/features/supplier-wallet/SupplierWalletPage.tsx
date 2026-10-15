@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Chip, Empty, ErrorState, Icon, PageBody, PageHeader, PageLoading, Section, Spinner, Tabs } from '@/components/ui';
 import { useAuth } from '@/auth/AuthProvider';
 import { canSeeCountry } from '@/auth/types';
@@ -7,16 +8,32 @@ import { useAsync } from '@/lib/useAsync';
 import { fetchWalletOverview, fetchWalletSuppliers } from './api';
 import { InvoiceDrawer } from './components/InvoiceDrawer';
 import { InvoiceTable } from './components/InvoiceTable';
+import { DrugMappingView } from './components/drugs/DrugMappingView';
+import { MatchBoard } from './components/match/MatchBoard';
+import { PayablesView } from './components/ap/PayablesView';
 import { SupplierList } from './components/SupplierList';
 import type { CountryCode, CountrySuppliers, DetailTab, InvoiceOverride, WalletInvoice } from './types';
 import styles from './SupplierWalletPage.module.css';
+
+/** 票夹内的视图：票夹（按供应商）/ 三单匹配 / 应付单 / 药品匹配关系 */
+type WalletView = 'wallet' | 'match' | 'ap' | 'drugs';
+const VIEWS: Array<[WalletView, string]> = [
+  ['wallet', '票夹'],
+  ['match', '三单匹配'],
+  ['ap', '应付单'],
+  ['drugs', '药品匹配关系'],
+];
+const asView = (v: string | null): WalletView => VIEWS.find(([k]) => k === v)?.[0] ?? 'wallet';
 
 export default function SupplierWalletPage() {
   const t = useT();
   const { user } = useAuth();
   const overview = useAsync(fetchWalletOverview, []);
+  const [params, setParams] = useSearchParams();
+  const view = asView(params.get('view'));
+  const setView = (v: WalletView) => setParams(v === 'wallet' ? {} : { view: v });
 
-  const [ctyPick, setCtyPick] = useState<CountryCode>('JP');
+  const [ctyPick, setCtyPick] = useState<CountryCode>(view === 'wallet' ? 'JP' : 'CN');
   const [supCode, setSupCode] = useState<string | null>('SUP-0013397');
   const [invNo, setInvNo] = useState<string | null>(null);
   const [tab, setTab] = useState<DetailTab>('match');
@@ -31,8 +48,8 @@ export default function SupplierWalletPage() {
   const cty = country?.code;
 
   const sups = useAsync<CountrySuppliers | null>(
-    () => (cty ? fetchWalletSuppliers(cty) : Promise.resolve(null)),
-    [cty],
+    () => (cty && view === 'wallet' ? fetchWalletSuppliers(cty) : Promise.resolve(null)),
+    [cty, view === 'wallet'],
   );
 
   const onPatch = useCallback((no: string, patch: InvoiceOverride) => {
@@ -107,6 +124,16 @@ export default function SupplierWalletPage() {
   const supplier = ready ? (ready.find((s) => s.code === supCode) ?? ready[0]) : undefined;
   const invoice = supplier?.invs.find((i) => i.no === invNo) ?? null;
 
+  /** 示例数据的三单匹配位于中国大陆；当前国家无数据时提供切换 */
+  const pickCn =
+    country.code !== 'CN' && countries.some((c) => c.code === 'CN')
+      ? () => {
+          setCtyPick('CN');
+          setSupCode(null);
+          setInvNo(null);
+        }
+      : undefined;
+
   const openInvoice = (i: WalletInvoice) => {
     setInvNo(i.no);
     setTab(i.route === '费控' ? 'exp' : 'match');
@@ -128,7 +155,20 @@ export default function SupplierWalletPage() {
           </span>
         </div>
 
-        {sups.error ? (
+        <Tabs
+          ariaLabel={t('票夹视图')}
+          value={view}
+          onChange={setView}
+          items={VIEWS.map(([v, label]) => ({ value: v, label: t(label) }))}
+        />
+
+        {view === 'match' ? <MatchBoard country={country.code} onPickCountry={pickCn} /> : null}
+        {view === 'ap' ? (
+          <PayablesView country={country.code} initialQuery={params.get('q') ?? ''} onPickCountry={pickCn} />
+        ) : null}
+        {view === 'drugs' ? <DrugMappingView country={country.code} onPickCountry={pickCn} /> : null}
+
+        {view !== 'wallet' ? null : sups.error ? (
           <ErrorState error={sups.error} onRetry={sups.reload} />
         ) : !ready || !supplier ? (
           ready && !supplier ? (
@@ -150,22 +190,24 @@ export default function SupplierWalletPage() {
           </div>
         )}
 
-        <Section title={t('票夹到下游的路由规则')}>
-          <div className={styles.ruleGrid}>
-            {(overview.data?.routes ?? []).map((r) => (
-              <div key={r.when} className={styles.rule}>
-                <div>
-                  <Chip tone="blue">{t(r.when)}</Chip>
+        {view === 'wallet' ? (
+          <Section title={t('票夹到下游的路由规则')}>
+            <div className={styles.ruleGrid}>
+              {(overview.data?.routes ?? []).map((r) => (
+                <div key={r.when} className={styles.rule}>
+                  <div>
+                    <Chip tone="blue">{t(r.when)}</Chip>
+                  </div>
+                  <div className={styles.ruleTo}>{t(r.to)}</div>
+                  <div className={styles.ruleHow}>{t(r.how)}</div>
                 </div>
-                <div className={styles.ruleTo}>{t(r.to)}</div>
-                <div className={styles.ruleHow}>{t(r.how)}</div>
-              </div>
-            ))}
-          </div>
-        </Section>
+              ))}
+            </div>
+          </Section>
+        ) : null}
       </PageBody>
 
-      {supplier ? (
+      {supplier && view === 'wallet' ? (
         <InvoiceDrawer
           invoice={invoice}
           supplier={supplier}

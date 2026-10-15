@@ -1,0 +1,399 @@
+/* 药品匹配关系 */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ink_ink {
+  color: var(--ink);
+}
+.ink_green {
+  color: var(--green-ink);
+}
+.ink_orange {
+  color: var(--orange-ink);
+}
+.ink_red {
+  color: var(--red-ink);
+}
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- KPI 筛选 ---------- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1.5px solid var(--line-soft);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.kpi:hover {
+  border-color: var(--blue-border);
+}
+.kpiOn {
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.kpiTitle,
+.kpiSub {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.kpiNum {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* ---------- 左右分栏 ---------- */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 560px;
+  overflow: hidden;
+}
+.list {
+  flex: 1 1 260px;
+  max-width: 100%;
+  border-inline-end: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  max-height: 720px;
+}
+.listHead {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.listMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: 6px;
+}
+.listBody {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.drug {
+  display: block;
+  width: 100%;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--line-soft);
+  border-inline-start: 3px solid transparent;
+  background: var(--surface);
+  padding-block: 9px;
+  padding-inline: 9px 12px;
+  cursor: pointer;
+}
+.drug:hover {
+  background: var(--accent-wash);
+}
+.drugOn {
+  border-inline-start-color: var(--accent);
+  background: var(--accent-wash);
+}
+.drugTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+.drugName {
+  font-weight: 600;
+  line-height: 1.4;
+  min-width: 0;
+}
+.drugSub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.main {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.mainHead {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.mainTitleBox {
+  min-width: 0;
+  margin-inline-end: auto;
+}
+.mainTitle {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.mainStats {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  margin-top: 2px;
+}
+.supSel {
+  width: auto !important;
+  max-width: 260px;
+}
+.confToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+/* ---------- 匹配导流图 ---------- */
+.flow {
+  flex: 1;
+  overflow: auto;
+  padding: 14px 18px;
+  background: var(--bg);
+  max-height: 720px;
+}
+.flowHead,
+.flowRow {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 150px minmax(180px, 1fr);
+}
+.flowHead {
+  margin-bottom: 8px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.center {
+  text-align: center;
+  font-weight: 400;
+  color: var(--muted);
+}
+.flowRow {
+  margin-bottom: 16px;
+}
+.flowCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.node {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.nodeWarn {
+  border-color: var(--orange-border);
+}
+.nodeName {
+  font-weight: 600;
+  line-height: 1.35;
+}
+.nodeSpec {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.nodeMeta {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.placeholder {
+  flex: 1;
+  min-height: 60px;
+  border: 1.5px dashed var(--orange-border);
+  border-radius: var(--radius);
+  background: var(--orange-wash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange-ink);
+  font-size: var(--fs-sm);
+  padding: 8px;
+}
+.edges {
+  position: relative;
+  width: 150px;
+}
+.edges svg {
+  display: block;
+  overflow: visible;
+}
+.edge {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  opacity: 0.5;
+}
+.edgeDot {
+  fill: var(--accent);
+}
+.edgeLabel {
+  position: absolute;
+  inset-inline: 0;
+  text-align: center;
+  pointer-events: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+.edgeTag {
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--blue-ink);
+}
+
+/* ---------- 关系图谱（二维树） ---------- */
+.tree {
+  flex: 1;
+  padding: 14px 18px;
+  background: var(--bg);
+  overflow: auto;
+  max-height: 720px;
+}
+.treeNote {
+  margin: 0 0 12px;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-wash);
+  border: 1px solid var(--blue-border);
+  color: var(--blue-ink);
+  font-size: var(--fs-sm);
+}
+.treeRoot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.treeList {
+  list-style: none;
+  margin: 0;
+  padding-inline-start: 28px;
+  border-inline-start: 1.5px solid var(--blue-border);
+  margin-inline-start: 18px;
+}
+.treeList > li {
+  position: relative;
+  padding-top: 10px;
+}
+.treeList > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -28px;
+  top: 28px;
+  width: 26px;
+  border-top: 1.5px solid var(--blue-border);
+}
+.treeNode {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-inline-start-width: 4px;
+  border-radius: var(--radius);
+  padding: 7px 12px;
+  position: relative;
+}
+.treeNode > span {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+button.treeNode {
+  cursor: pointer;
+}
+button.treeNode:hover {
+  background: var(--accent-wash);
+}
+.lv0 {
+  border-inline-start-color: var(--accent);
+}
+.lv1 {
+  border-inline-start-color: var(--chart-4);
+}
+.lv2 {
+  border-inline-start-color: var(--amber);
+}
+.ratio {
+  color: var(--blue-ink) !important;
+  font-weight: 700;
+}
+.badge {
+  position: absolute;
+  top: -8px;
+  inset-inline-end: -8px;
+  min-width: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--alert);
+  color: #fff !important;
+  font-size: 10px !important;
+  font-weight: 700;
+  text-align: center;
+  line-height: 18px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+}
+.legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.lv0Dot {
+  background: var(--accent);
+}
+.lv1Dot {
+  background: var(--chart-4);
+}
+.lv2Dot {
+  background: var(--amber);
+}

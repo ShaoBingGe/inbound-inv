@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, ButtonLink, Chip, Drawer, Table, Tabs, useToast } from '@/components/ui';
 import type { Tone } from '@/components/ui';
-import { PROTOTYPE_ROUTE } from '@/app/routes';
+import { PROTOTYPE_ROUTE, ROUTES } from '@/app/routes';
 import { useT } from '@/i18n';
 import { cx } from '@/lib/sample';
 import { acceptWithinTolerance, advanceApVoucher, pushToExpense, rematchInvoice } from '../api';
@@ -316,6 +316,7 @@ function MatchPanel({
           {t('在容差内接受')}
         </Button>
         <ButtonLink to={PROTOTYPE_ROUTE['Portal.dc.html']}>{t('向供应商发起差异处理')}</ButtonLink>
+        <ButtonLink to={ROUTES.supplierWalletView('match')}>{t('在三单匹配中按匹配组处理')}</ButtonLink>
       </div>
     </>
   );

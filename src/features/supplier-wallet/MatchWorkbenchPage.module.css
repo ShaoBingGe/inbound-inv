@@ -1,0 +1,568 @@
+/* 三单匹配 · 手工匹配工作台 */
+
+.body {
+  max-width: 1600px;
+  padding-top: 14px;
+  padding-bottom: 0;
+  gap: 10px;
+}
+.headBadges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pair {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-weight: 600;
+}
+.pairArrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--accent);
+  font-size: var(--fs-xs);
+}
+.pairArrow b {
+  font-size: var(--fs-lg);
+}
+.trainLink {
+  margin-inline-start: auto;
+}
+
+/* ---------- 匹配组看板 ---------- */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.sum {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 9px 13px;
+  min-width: 0;
+}
+.sumTitle {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.sumNum {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 3px;
+}
+.sumNum > :first-child {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.sumUnit {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.sumSub {
+  font-size: var(--fs-xs);
+  color: var(--faint);
+  margin-top: 3px;
+}
+.sumSub b {
+  font-size: var(--fs-sm);
+}
+.ink_green {
+  color: var(--green-ink);
+}
+.ink_orange {
+  color: var(--orange-ink);
+}
+.ink_red {
+  color: var(--red-ink);
+}
+.ink_blue {
+  color: var(--accent);
+}
+
+/* ---------- 匹配明细（行级勾稽） ---------- */
+.match {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px minmax(0, 1fr);
+  height: clamp(440px, calc(100vh - 360px), 980px);
+}
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  /* 滚出可视区的明细行，连线在匹配区边缘截断 */
+  overflow: hidden;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  z-index: 1;
+}
+.colHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 2px 8px;
+}
+.colTitle {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.colMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.scrollInv {
+  padding-inline-end: 6px;
+}
+.scrollInb {
+  padding-inline-start: 6px;
+}
+
+.doc {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.docHead {
+  padding: 9px 12px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line-soft);
+}
+.docHeadInb {
+  background: color-mix(in srgb, var(--green-bg) 45%, var(--surface));
+}
+.docTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.docId {
+  font-weight: 600;
+}
+.docTools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.docSub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.filters {
+  margin-top: 8px;
+}
+.filters button {
+  min-height: 24px !important;
+  padding: 0 9px !important;
+  font-size: var(--fs-xs);
+}
+.lines {
+  padding: 6px;
+}
+
+.line {
+  display: block;
+  width: 100%;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 7px 9px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.line:hover {
+  border-color: var(--blue-border);
+}
+.lineDiff {
+  border-color: var(--orange-border);
+}
+.lineOn {
+  background: var(--accent-wash);
+  border-color: var(--blue-border);
+}
+.linePend {
+  background: var(--orange-wash);
+  border-color: var(--amber);
+}
+.lineAnim {
+  animation: narrowIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes narrowIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}
+.lineTop,
+.lineBottom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.lineBottom {
+  justify-content: space-between;
+  margin-top: 3px;
+}
+.lineName {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.lineSpec {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.lineAmt {
+  font-weight: 600;
+  flex: none;
+}
+.mPct {
+  flex: none;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+.dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dotEnd {
+  margin-inline-start: auto;
+}
+.dotStart {
+  margin-inline-end: auto;
+}
+.dot_full {
+  background: var(--chart-4);
+}
+.dot_partial {
+  background: var(--amber);
+}
+.dot_unmatched {
+  background: var(--alert);
+}
+.bal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 3px;
+}
+.balTag {
+  font-size: var(--fs-xs);
+  color: var(--green-ink);
+  background: var(--green-bg);
+  border-radius: 5px;
+  padding: 0 7px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  padding: 0 6px;
+}
+.legend {
+  list-style: none;
+  margin: 9px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 选中发票行 · 匹配明细 */
+.sel {
+  position: absolute;
+  inset-inline-start: 4px;
+  bottom: 12px;
+  z-index: 12;
+  width: 250px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-pop);
+  padding: 11px 13px;
+}
+.selTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.selName {
+  font-weight: 600;
+  margin-top: 3px;
+}
+.selPcts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 9px;
+}
+.selPct {
+  text-align: center;
+  border-radius: var(--radius-sm);
+  padding: 7px 3px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.selPct b {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+.pctAmt {
+  background: var(--red-bg);
+}
+.pctAmt b {
+  color: var(--red-ink);
+}
+.pctQty {
+  background: var(--orange-bg);
+}
+.pctQty b {
+  color: var(--orange-ink);
+}
+.pctPrice {
+  background: var(--purple-bg);
+}
+.pctPrice b {
+  color: var(--purple-ink);
+}
+.selDiffs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+}
+
+.ratioInput {
+  position: absolute;
+  z-index: 20;
+  width: 130px !important;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-weight: 700;
+  border-color: var(--amber) !important;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--amber) 28%, transparent);
+}
+
+/* ---------- 差额单 / 底部操作 ---------- */
+.adjBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  background: var(--orange-wash);
+  border: 1px solid var(--orange-border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+}
+.adjTitle {
+  font-weight: 600;
+  color: var(--orange-ink);
+  font-size: var(--fs-sm);
+}
+.adjDoc {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  font-size: var(--fs-xs);
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--orange-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.adjDocOn {
+  border-color: var(--amber);
+  background: var(--orange-wash);
+}
+
+.bar {
+  position: sticky;
+  bottom: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-inline: calc(-1 * var(--space-6));
+  padding: 11px var(--space-6);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+.linkBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  background: var(--orange-wash);
+  border: 1px solid var(--orange-border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  color: var(--orange-ink);
+  font-size: var(--fs-sm);
+}
+.barStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+.barStat {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.barStat b {
+  display: block;
+  font-size: var(--fs-lg);
+  color: var(--ink);
+}
+.barActions {
+  margin-inline-start: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* ---------- 弹窗 ---------- */
+.mRow {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.mHead {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  padding: 9px 12px;
+}
+.mMain {
+  min-width: 0;
+  flex: 1 1 200px;
+}
+.mTitle {
+  font-weight: 600;
+}
+.mSub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: 2px;
+}
+.mRight {
+  font-weight: 600;
+  flex: none;
+}
+.mLines {
+  padding: 2px 10px 9px;
+  background: var(--wash);
+}
+.mLine {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--line-soft);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  margin-top: 6px;
+}
+.mLine > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+.typeSel {
+  width: auto !important;
+  border-color: var(--orange-border) !important;
+  background: var(--orange-wash) !important;
+  color: var(--orange-ink);
+}
+.note {
+  margin-top: 6px;
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  line-height: 1.55;
+  font-size: var(--fs-sm);
+  border: 1px solid var(--orange-border);
+  background: var(--orange-wash);
+  color: var(--orange-ink);
+}
+.noteDanger {
+  border-color: var(--red-border);
+  background: var(--red-bg);
+  color: var(--red-ink);
+}
+.search {
+  margin-bottom: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lineAnim {
+    animation: none;
+  }
+}

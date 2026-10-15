@@ -1,0 +1,75 @@
+/* 应付单查询 */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.toolbar select {
+  width: auto;
+  max-width: 260px;
+}
+.search {
+  width: 260px !important;
+  max-width: 100%;
+}
+.total {
+  margin-inline-start: auto;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+.table {
+  min-width: 1000px;
+}
+.lineTable {
+  min-width: 780px;
+}
+.r {
+  text-align: end !important;
+}
+.strong {
+  font-weight: 600;
+}
+.muted {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+.empty {
+  text-align: center !important;
+  padding: 40px 12px !important;
+  color: var(--muted);
+}
+.refs {
+  color: var(--accent);
+  font-size: var(--fs-xs);
+}
+.detTitle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+.detSub {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 4px;
+}
+.detFoot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+.detFoot > :first-child {
+  margin-inline-end: auto;
+}
+.detTotal {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}

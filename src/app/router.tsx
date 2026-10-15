@@ -19,6 +19,7 @@ const InvoicePool = page(() => import('@/features/invoice-pool/InvoicePoolPage')
 const InvoiceLifecycle = page(() => import('@/features/invoice-lifecycle/InvoiceLifecyclePage'));
 const InvoiceViewer = page(() => import('@/features/invoice-viewer/InvoiceViewerPage'));
 const SupplierWallet = page(() => import('@/features/supplier-wallet/SupplierWalletPage'));
+const MatchWorkbench = page(() => import('@/features/supplier-wallet/MatchWorkbenchPage'));
 const CaptureH5 = page(() => import('@/features/capture-h5/CaptureH5Page'));
 const CaptureMailbox = page(() => import('@/features/capture-mailbox/CaptureMailboxPage'));
 const CapturePortal = page(() => import('@/features/capture-portal/CapturePortalPage'));
@@ -66,6 +67,7 @@ export const routes: RouteObject[] = [
       { path: ROUTES.poolEnterprise, element: <InvoicePool /> },
       { path: ROUTES.invoiceLifecycle(), element: <InvoiceLifecycle /> },
       { path: ROUTES.supplierWallet, element: <SupplierWallet /> },
+      { path: ROUTES.matchWorkbench(), element: <MatchWorkbench /> },
       { path: ROUTES.captureH5, element: <CaptureH5 /> },
       { path: ROUTES.captureMailbox, element: <CaptureMailbox /> },
       { path: ROUTES.capturePortal, element: <CapturePortal /> },
