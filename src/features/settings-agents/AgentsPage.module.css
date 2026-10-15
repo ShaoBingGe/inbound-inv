@@ -1,0 +1,411 @@
+/* ---------- 页面骨架 ---------- */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.whoLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--accent-wash);
+  color: var(--ink-2);
+}
+.noticeIcon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--accent);
+}
+.noticeLink {
+  margin-inline-start: auto;
+  flex: none;
+  white-space: nowrap;
+}
+
+.h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.h2sm {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.muted {
+  color: var(--muted);
+}
+.ink2 {
+  color: var(--ink-2);
+}
+.small {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.spacer {
+  flex: 1;
+}
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+/* ---------- Agent 能力配置 ---------- */
+.agentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.agentCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  min-width: 0;
+}
+.agentName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.agentName svg {
+  color: var(--accent);
+}
+.agentLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 6px;
+  font-size: var(--fs-sm);
+}
+.agentKey {
+  flex: none;
+  min-width: 44px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.skillLink {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+.skillLink:hover {
+  border-color: var(--focus);
+  background: var(--accent-wash);
+  text-decoration: none;
+}
+
+/* ---------- 今日作业 ---------- */
+.todoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+.todo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--surface));
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.todoAuto {
+  border-color: color-mix(in srgb, var(--green-ink) 32%, var(--surface));
+}
+.todoDone {
+  border-color: var(--line);
+  background: var(--surface-2);
+}
+.todoLv {
+  flex: none;
+  margin-top: 2px;
+}
+.todoMain {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+.todoTitle {
+  font-weight: 600;
+}
+.todoBody {
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.memChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.todoActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+.todoResult {
+  color: var(--green-ink);
+  align-self: center;
+}
+.flash {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+  color: var(--surface);
+}
+
+/* ---------- 记忆 ---------- */
+.memCard {
+  padding: 0;
+}
+.memHead {
+  padding: 16px 20px 0;
+  align-items: center;
+}
+.memTabs {
+  padding: 0 20px;
+  margin-top: 8px;
+}
+.memBody {
+  padding: 14px 20px;
+}
+.memDesc {
+  color: var(--ink-2);
+  margin-bottom: 10px;
+}
+.memTable {
+  min-width: 980px;
+}
+.memKey {
+  font-weight: 500;
+  white-space: nowrap;
+}
+.memVal {
+  min-width: 260px;
+}
+.end {
+  text-align: end;
+}
+.conf {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.confTrack {
+  width: 48px;
+  height: 6px;
+  background: var(--line-soft);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.confBar {
+  height: 6px;
+}
+.rowActions {
+  display: flex;
+  gap: 6px;
+}
+.btnSm {
+  min-height: 28px;
+}
+.memNotes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.memNote {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.memNoteTitle {
+  font-weight: 600;
+}
+.memNoteBody {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+/* ---------- 自动化分级 / 作业流 ---------- */
+.twoCol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.half {
+  flex: 1 1 440px;
+  min-width: 0;
+  padding: 16px 20px;
+}
+.sub {
+  color: var(--muted);
+  margin-top: 2px;
+}
+.tableBox {
+  margin-top: 12px;
+}
+.levelTable {
+  min-width: 560px;
+}
+.whenCell {
+  min-width: 160px;
+}
+.seg {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.seg button {
+  border: 0;
+  border-inline-end: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 0 12px;
+  min-height: 32px;
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.seg button:last-child {
+  border-inline-end: 0;
+}
+.seg button:hover:not(:disabled) {
+  background: var(--accent-wash);
+}
+.seg button[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--blue-ink);
+  font-weight: 600;
+}
+.seg button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 10px;
+}
+.legend b {
+  font-weight: 600;
+  color: var(--ink);
+}
+.flowList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+.flowStep {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.flowStepKey {
+  background: var(--green-bg);
+}
+.flowDot {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-sm);
+  background: var(--accent);
+  color: var(--surface);
+}
+.flowStepKey .flowDot {
+  background: var(--green-ink);
+}
+.flowMain {
+  flex: 1;
+  min-width: 0;
+}
+.flowLabel {
+  font-weight: 600;
+}
+.flowSub {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.flowTime {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  flex: none;
+}
+
+/* ---------- 运行记录 ---------- */
+.runCard {
+  padding: 0;
+}
+.runHead {
+  padding: 16px 20px 12px;
+  align-items: center;
+}
+.runStats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.runStats b {
+  font-weight: 600;
+}
+.runTableBox {
+  border-top: 1px solid var(--line);
+}
+.runTable {
+  min-width: 1040px;
+}
+.cellSm {
+  font-size: var(--fs-sm);
+}
+.cellBasis {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.tableBorder {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tableBorder tbody tr:last-child td {
+  border-bottom: 0;
+}
+.nowrap {
+  white-space: nowrap;
+}

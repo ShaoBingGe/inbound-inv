@@ -1,0 +1,50 @@
+.footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 15px var(--space-6);
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.selLine {
+  margin-top: 2px;
+  font-size: var(--fs-lg);
+}
+.sep {
+  width: 1px;
+  height: 38px;
+  background: var(--line);
+}
+.total {
+  flex: 1;
+  min-width: 0;
+}
+.totalLine {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 2px;
+}
+.selTotal {
+  font-size: calc(var(--fs-xl) + 2px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.breakdown {
+  min-width: 0;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.blocked {
+  max-width: 230px;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--alert);
+  text-align: end;
+  text-wrap: pretty;
+}
+.importBtn {
+  padding: 0 22px;
+  white-space: nowrap;
+}

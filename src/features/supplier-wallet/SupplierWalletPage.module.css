@@ -1,0 +1,360 @@
+/* ---------- 顶栏 ---------- */
+.headStats {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.headStatValue {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 国家页签贴在标题栏底边（与设计稿一致：标题与页签同一白底） */
+.countryRow {
+  flex-basis: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  margin-bottom: -15px;
+}
+.countryRow > [role='tablist'] {
+  flex-wrap: nowrap;
+  border-bottom-color: transparent;
+}
+.countN {
+  color: var(--muted);
+  font-weight: 400;
+  margin-inline-start: 4px;
+}
+
+/* ---------- 主体 ---------- */
+.body {
+  max-width: 1320px;
+  padding-top: 18px;
+  padding-bottom: 48px;
+}
+
+.residency {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--accent-wash);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--surface));
+  color: var(--blue-ink);
+}
+.residency svg {
+  flex: none;
+}
+
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ---------- 供应商列表 ---------- */
+.supCard {
+  flex: 1 1 280px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.cardHead {
+  padding: 14px 16px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.supRow {
+  display: block;
+  width: 100%;
+  text-align: start;
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-inline-start: 3px solid transparent;
+  background: var(--surface);
+  cursor: pointer;
+  padding: 12px 16px;
+}
+.supRow:hover {
+  background: var(--accent-wash);
+}
+.supRowOn {
+  border-inline-start-color: var(--accent);
+  background: var(--accent-wash);
+}
+.supName {
+  font-weight: 600;
+}
+.supMeta {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.supNums {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+  font-size: var(--fs-sm);
+}
+
+.bad {
+  color: var(--red-ink);
+}
+.warnInk {
+  color: var(--orange-ink);
+}
+.okInk {
+  color: var(--green-ink);
+}
+
+/* ---------- 供应商发票 ---------- */
+.invCard {
+  flex: 999 1 620px;
+  min-width: 0;
+}
+.invHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: baseline;
+  padding: 14px 18px 10px;
+}
+.invMeta {
+  color: var(--ink-2);
+}
+.invHeadLink {
+  margin-inline-start: auto;
+}
+.tableTop {
+  border-top: 1px solid var(--line);
+}
+.invTable {
+  min-width: 900px;
+}
+.r {
+  text-align: end !important;
+}
+.rowOn td {
+  background: var(--accent-wash);
+}
+.kindSub {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.loadingBox {
+  padding: 24px 16px;
+}
+
+/* ---------- 路由规则 ---------- */
+.ruleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.rule {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.ruleTo {
+  font-weight: 600;
+  margin-top: 8px;
+}
+.ruleHow {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+/* ---------- 发票详情抽屉 ---------- */
+.detHead {
+  min-width: 0;
+  font-weight: 400;
+}
+.detNo {
+  font-size: 16px;
+  font-weight: 500;
+}
+.detSub {
+  color: var(--ink-2);
+  font-size: var(--fs-base);
+}
+.detTabs {
+  position: sticky;
+  top: -16px;
+  z-index: 1;
+  margin: -16px -18px 0;
+  padding: 0 18px;
+  background: var(--surface);
+  overflow-x: auto;
+}
+.detTabs > [role='tablist'] {
+  flex-wrap: nowrap;
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 16px;
+}
+
+.face {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.thumb {
+  flex: 1 1 200px;
+  max-width: 240px;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  position: relative;
+}
+.thumb > span {
+  position: absolute;
+  inset-inline-start: 10%;
+}
+.thumbTitle {
+  top: 6%;
+  width: 50%;
+  height: 4%;
+  background: var(--ink);
+  opacity: 0.7;
+}
+.thumbLine {
+  width: 80%;
+  height: 2%;
+  background: var(--line-soft);
+}
+.thumbL1 {
+  top: 42%;
+}
+.thumbL2 {
+  top: 47%;
+}
+.thumbL3 {
+  top: 52%;
+}
+.thumbStamp {
+  inset-inline-start: 56% !important;
+  top: 74%;
+  width: 34%;
+  height: 5%;
+  border: 2px solid var(--accent);
+  box-sizing: border-box;
+}
+.faceFields {
+  flex: 999 1 300px;
+  min-width: 0;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.faceActions {
+  margin-top: 10px;
+}
+
+.matchHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+}
+.matchMeta {
+  color: var(--ink-2);
+}
+.boxed {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.matchTable {
+  min-width: 640px;
+}
+.logTable {
+  min-width: 560px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.step {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.stepIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-sm);
+  background: var(--gray-bg);
+  color: var(--muted);
+}
+.stepDone {
+  background: var(--green-bg);
+  color: var(--green-ink);
+}
+.stepBody {
+  flex: 1;
+  min-width: 0;
+}
+.stepLabel {
+  font-weight: 600;
+}
+.stepSub {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.note {
+  color: var(--muted);
+}
+
+.expBox {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.expTitle {
+  font-weight: 600;
+}
+.expBody {
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.fact {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+.factV {
+  font-weight: 600;
+  margin-top: 2px;
+}

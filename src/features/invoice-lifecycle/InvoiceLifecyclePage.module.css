@@ -1,0 +1,717 @@
+/* 发票全生命周期。设计稿里 tokens.css 尚未覆盖的颜色以局部变量定义在 .page 上（建议后续提升为全局令牌）。 */
+.page {
+  --lc-cur: #e08a2e;
+  --lc-todo-ink: #9aa0a8;
+  --lc-rev-border: #f3c3bf;
+  --lc-rev-bg: #fff8f7;
+  --lc-wash: #fafbfc;
+  --lc-viewer-bg: #e5e6eb;
+  --lc-tr-bg: #f6f3fd;
+  --lc-tr-line: #e4dcf7;
+  --lc-tr-border: #b9a7ee;
+  --lc-divider: #f0f1f2;
+  /* 原件影像「纸面」配色（模拟打印件，不随主题变化） */
+  --paper-bg: #ffffff;
+  --paper-ink: #222222;
+  --paper-rule: #333333;
+  --paper-line: #bbbbbb;
+  --paper-head: #f1f1f1;
+  --paper-muted: #666666;
+  --paper-soft: #444444;
+  --paper-dot: #cccccc;
+  --paper-thumb: #999999;
+  --paper-shadow: 0 3px 10px rgba(31, 35, 41, 0.16);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ---------- 页头 ---------- */
+.crumbSep {
+  margin-inline: 4px;
+}
+.sampleLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sampleSelect {
+  max-width: 420px;
+}
+
+/* ---------- 概要 ---------- */
+.summary {
+  padding: 16px 20px;
+}
+.summaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: flex-start;
+}
+.summaryMain {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.supplier {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.invNo {
+  color: var(--ink-2);
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  flex: 1 1 420px;
+}
+.fact {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+.factValue {
+  font-weight: 600;
+  margin-top: 2px;
+  color: var(--ink);
+}
+.factGood {
+  color: var(--green-ink);
+}
+
+/* ---------- 区块通用 ---------- */
+.block {
+  padding: 16px 20px;
+}
+.blockHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+.blockTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.blockTitleSm {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.blockDesc {
+  color: var(--muted);
+}
+
+/* ---------- 时间线 ---------- */
+.clip {
+  overflow: hidden;
+}
+.timelineScroll {
+  overflow-x: auto;
+  margin-top: 14px;
+}
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  min-width: 1040px;
+}
+.step {
+  position: relative;
+  padding-top: 18px;
+  --dot: var(--line-strong);
+  --rail: var(--line-strong);
+  --label: var(--lc-todo-ink);
+}
+.step[data-state='done'] {
+  --dot: var(--accent);
+  --rail: var(--accent);
+  --label: var(--ink);
+}
+.step[data-state='cur'] {
+  --dot: var(--lc-cur);
+  --label: var(--orange-ink);
+}
+.step[data-state='rev'] {
+  --dot: var(--red-ink);
+  --label: var(--red-ink);
+}
+.stepRail {
+  position: absolute;
+  inset-inline: 0;
+  top: 7px;
+  height: 2px;
+  background: var(--rail);
+}
+.stepDot {
+  position: absolute;
+  inset-inline-start: 50%;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: -8px;
+  border-radius: 8px;
+  background: var(--dot);
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--dot);
+  box-sizing: border-box;
+}
+.stepLabel {
+  text-align: center;
+  font-weight: 600;
+  color: var(--label);
+}
+.stepAt {
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.stepWho {
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  margin-top: 4px;
+  min-height: 34px;
+}
+.stepNote {
+  margin: 6px 4px 0;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--orange-bg);
+  font-size: var(--fs-xs);
+  color: var(--orange-ink);
+  text-align: center;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 12px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  flex: none;
+}
+.legendDone {
+  background: var(--accent);
+}
+.legendCur {
+  background: var(--lc-cur);
+}
+.legendTodo {
+  background: var(--line-strong);
+}
+.legendRev {
+  background: var(--red-ink);
+}
+
+/* ---------- 正逆向 + 税务（两栏） ---------- */
+.twoCol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.col {
+  flex: 1 1 460px;
+  min-width: 0;
+  padding: 16px 20px;
+}
+.docList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.origDoc {
+  padding: 10px 12px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-wash);
+}
+.docHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.docKind {
+  font-weight: 600;
+}
+.docLine {
+  color: var(--ink-2);
+}
+.revRow {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+.revConnector {
+  width: 22px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--red-ink);
+}
+.revConnectorLine {
+  width: 2px;
+  flex: 1;
+  background: var(--line-strong);
+}
+.revDoc {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--lc-rev-border);
+  border-radius: var(--radius);
+  background: var(--lc-rev-bg);
+}
+.revKind {
+  font-weight: 600;
+  color: var(--red-ink);
+}
+.revEffect {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.revChips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.revNone {
+  padding: 10px 12px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.netBox {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--lc-wash);
+}
+.netLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 4px;
+}
+.netLine b {
+  font-weight: 600;
+}
+.netNeg {
+  color: var(--red-ink);
+}
+.netRule {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+.taxTable {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.taxTable table {
+  min-width: 520px;
+}
+.right {
+  text-align: end;
+}
+.taxName {
+  font-weight: 500;
+}
+.taxTreat {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.ruleLines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+.ruleLine {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 10px;
+  font-size: 12.5px;
+  padding: 5px 0;
+  border-top: 1px solid var(--lc-divider);
+}
+.ruleKey {
+  color: var(--muted);
+}
+
+/* ---------- 规则路由 ---------- */
+.routeHead {
+  padding: 16px 20px 12px;
+}
+.routeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 0 20px 16px;
+}
+.routeCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.routeValue {
+  font-weight: 600;
+  margin-top: 2px;
+}
+.routeWhy {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.matrixWrap {
+  border-top: 1px solid var(--line);
+}
+.matrixWrap table {
+  min-width: 1100px;
+}
+.matrixStage {
+  font-weight: 500;
+  white-space: nowrap;
+}
+.matrixCell {
+  color: var(--ink-2);
+  font-size: 12.5px;
+  min-width: 170px;
+  vertical-align: top;
+  white-space: normal;
+}
+
+/* ---------- 影像 + 识别数据 ---------- */
+.imgRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  align-items: stretch;
+}
+.imgCol {
+  flex: 1 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.zoomLabel {
+  min-width: 48px;
+  text-align: center;
+}
+.toolSep {
+  width: 1px;
+  height: 22px;
+  background: var(--line);
+  margin: 0 4px;
+}
+.spacer {
+  flex: 1;
+}
+.extLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: var(--control-h);
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--ink);
+  box-sizing: border-box;
+}
+.extLink:hover {
+  border-color: var(--focus);
+  background: var(--accent-wash);
+  text-decoration: none;
+  color: var(--ink);
+}
+.viewer {
+  height: 640px;
+  overflow: auto;
+  background: var(--lc-viewer-bg);
+  border-radius: var(--radius);
+}
+.paperBox {
+  margin: 16px auto;
+  position: relative;
+}
+.paperScale {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  width: 560px;
+  transform-origin: 0 0;
+}
+[dir='rtl'] .paperScale {
+  transform-origin: 100% 0;
+}
+.paper {
+  width: 560px;
+  min-height: 792px;
+  background: var(--paper-bg);
+  box-shadow: var(--paper-shadow);
+  padding: 34px 38px;
+  box-sizing: border-box;
+  font-family: 'Noto Sans SC', 'IBM Plex Sans', sans-serif;
+  color: var(--paper-ink);
+  direction: ltr;
+  text-align: left;
+}
+.paperHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--paper-rule);
+  padding-bottom: 10px;
+}
+.paperTitle {
+  font-size: 19px;
+  font-weight: 600;
+}
+.paperPageLabel {
+  font-size: 10.5px;
+  color: var(--paper-muted);
+  margin-top: 2px;
+}
+.paperMeta {
+  text-align: right;
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+.party {
+  border: 1px solid var(--paper-line);
+  padding: 8px 10px;
+}
+.partyTitle {
+  font-weight: 600;
+  font-size: 11px;
+}
+.paperTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 10.5px;
+}
+.paperTable th {
+  background: var(--paper-head);
+  padding: 5px 6px;
+  border: 1px solid var(--paper-line);
+  font-weight: 600;
+  text-align: right;
+}
+.paperTable td {
+  padding: 5px 6px;
+  border: 1px solid var(--paper-line);
+  text-align: right;
+}
+.paperTable th:first-child,
+.paperTable td:first-child {
+  text-align: left;
+}
+.totalsWrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.totals {
+  width: 260px;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.totalsRow {
+  display: flex;
+  justify-content: space-between;
+}
+.totalsGrand {
+  border-top: 1px solid var(--paper-rule);
+  font-weight: 600;
+  font-size: 12px;
+}
+.payInfo {
+  margin-top: 22px;
+  font-size: 10px;
+  color: var(--paper-soft);
+  line-height: 1.7;
+}
+.textPage {
+  margin-top: 16px;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.textTitle {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.textLine {
+  border-bottom: 1px dotted var(--paper-dot);
+  padding: 3px 0;
+}
+.thumbs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.thumb {
+  width: 46px;
+  height: 60px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-sizing: border-box;
+}
+.thumbActive {
+  border-color: var(--accent);
+}
+.thumbBar {
+  height: 4px;
+  background: var(--paper-thumb);
+  width: 70%;
+}
+.thumbLine {
+  height: 2px;
+  background: var(--paper-dot);
+}
+.thumbNo {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+.dataCol {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.dataHead {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--lc-wash);
+}
+.dataTitle {
+  font-weight: 600;
+}
+.dataHead .trOn,
+.dataHead .trOn:hover {
+  background: var(--purple-bg);
+  border-color: var(--lc-tr-border);
+  color: var(--purple-ink);
+}
+.trNote {
+  flex: none;
+  padding: 7px 12px;
+  background: var(--lc-tr-bg);
+  color: var(--purple-ink);
+  font-size: var(--fs-sm);
+  border-bottom: 1px solid var(--lc-tr-line);
+}
+.dataBody {
+  height: 620px;
+  overflow-y: auto;
+  padding: 4px 14px 14px;
+}
+.dataSection {
+  padding-top: 12px;
+}
+.dataSectionTitle {
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.dataRow {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--lc-divider);
+}
+.dataKey {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.dataKeyT {
+  color: var(--purple-ink);
+  font-size: var(--fs-xs);
+}
+.dataVal {
+  min-width: 0;
+}
+.wrapAny {
+  overflow-wrap: anywhere;
+}
+.dataValT {
+  color: var(--purple-ink);
+  font-size: var(--fs-sm);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+.trChip {
+  font-size: 10.5px;
+  padding: 0 6px;
+  margin-inline-end: 6px;
+}

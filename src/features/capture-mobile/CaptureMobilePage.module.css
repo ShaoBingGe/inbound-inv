@@ -1,0 +1,569 @@
+/* 移动端采集：设备框预览（/capture/mobile）与扫码独立页（/m/capture） */
+
+/* ---------- 预览页（应用框架内） ---------- */
+.previewWrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+.device {
+  flex: none;
+  padding: 10px;
+  border-radius: 46px;
+  background: var(--ink);
+  box-shadow: var(--shadow-modal);
+}
+.sideNote {
+  flex: 0 1 300px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.sideText {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--fs-base);
+}
+.sideLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--space-1);
+}
+
+/* ---------- 独立页（扫码打开） ---------- */
+.standalone {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+/* ---------- 手机外壳 ---------- */
+.phone {
+  /* 本模块局部色（设计稿中的提示底色、取景器与纸张示意），建议提升为全局令牌 */
+  --warn-wash: #fff7ec;
+  --warn-line: #f5d4a6;
+  --ok-line: #b7dec7;
+  --cam-bg: #141518;
+  --paper: #f7f6f2;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  overflow: hidden;
+  position: relative;
+}
+.framed {
+  width: 390px;
+  height: 844px;
+  border-radius: 36px;
+}
+.fluid {
+  width: 100%;
+  max-width: 520px;
+  height: 100vh;
+  height: 100dvh;
+  margin-inline: auto;
+}
+
+.topBar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border-block-end: 1px solid var(--line);
+}
+.framed .topBar {
+  padding-block-start: 22px;
+}
+.backBtn {
+  width: 44px;
+  height: 44px;
+  margin-block: -8px;
+  margin-inline: -10px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+}
+.backBtn:hover {
+  background: var(--accent-wash);
+}
+[dir='rtl'] .backBtn svg {
+  transform: scaleX(-1);
+}
+.topTitleWrap {
+  flex: 1;
+  min-width: 0;
+}
+.topTitle {
+  font-weight: 600;
+  font-size: 16px;
+}
+.topSub {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stateBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+.small {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+/* 大按钮（设计稿 .big） */
+.bigBtn {
+  min-height: 48px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: var(--fs-md);
+  gap: 8px;
+  white-space: normal;
+  text-align: center;
+}
+/* 小号描边按钮（设计稿 .sm） */
+.smBtn {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius);
+  border-color: var(--accent);
+  color: var(--blue-ink);
+  font-size: var(--fs-md);
+}
+.smBtn:hover {
+  color: var(--blue-ink);
+}
+
+/* ---------- 首页 ---------- */
+.homeBody {
+  padding: 16px;
+  gap: 14px;
+}
+.placeRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-top: 2px;
+}
+.placeValue {
+  font-size: 18px;
+  font-weight: 600;
+}
+.placeHint {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.placeNote {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 8px;
+}
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.recentHead {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.recentRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.recentMain {
+  flex: 1;
+  min-width: 0;
+}
+.recentSeller {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recentAmt {
+  text-align: end;
+  font-weight: 500;
+}
+
+/* ---------- 拍票 ---------- */
+.cam {
+  flex: 1;
+  background: var(--cam-bg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.viewfinder {
+  flex: 1;
+  position: relative;
+}
+.frameGuide {
+  position: absolute;
+  inset: 70px 44px 120px;
+  border: 2px dashed rgba(255, 255, 255, 0.75);
+  border-radius: var(--radius);
+}
+.paper {
+  position: absolute;
+  inset: 92px 62px 142px;
+  background: var(--paper);
+  border-radius: 3px;
+  transform: rotate(-3deg);
+  opacity: 0.92;
+  overflow: hidden;
+}
+.paperTitle {
+  margin: 18px 16px 0;
+  height: 10px;
+  width: 55%;
+  background: #3a3a3a;
+  border-radius: 2px;
+}
+.paperSub {
+  margin: 10px 16px 0;
+  height: 6px;
+  width: 35%;
+  background: #bbb;
+  border-radius: 2px;
+}
+.paperLine {
+  margin: 8px 16px 0;
+  height: 5px;
+  background: #ddd;
+}
+.paperTotal {
+  margin-block: 40px 0;
+  margin-inline: 50% 16px;
+  height: 8px;
+  background: #999;
+  border-radius: 2px;
+}
+.camHintWrap {
+  position: absolute;
+  inset-inline: 0;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  padding-inline: 16px;
+}
+.camHint {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  text-align: center;
+}
+.camBar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18px 0 28px;
+}
+.camRound {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: var(--fs-base);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  overflow: hidden;
+}
+.camRound:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.shutter {
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+  border: 4px solid #fff;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+.shutter:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* ---------- 识别中 ---------- */
+.runBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.runTitle {
+  font-size: 17px;
+  font-weight: 600;
+}
+.stepRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.stepIcon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-sm);
+}
+.stepOk {
+  background: var(--green-bg);
+  color: var(--green-ink);
+}
+.stepWarn {
+  background: var(--orange-bg);
+  color: var(--orange-ink);
+}
+.stepLabel {
+  font-weight: 500;
+}
+
+/* ---------- 确认识别结果 ---------- */
+.resBody {
+  padding: 14px 16px 16px;
+  gap: 12px;
+}
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.seller {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.amountRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.amount {
+  font-size: 22px;
+  font-weight: 600;
+}
+.converted {
+  color: var(--ink-2);
+  font-size: 12.5px;
+}
+.fxNote {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  margin-top: 4px;
+}
+.summary {
+  border: 1px solid;
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+}
+.summaryWarn {
+  background: var(--warn-wash);
+  border-color: var(--warn-line);
+  color: var(--orange-ink);
+}
+.summaryOk {
+  background: var(--green-bg);
+  border-color: var(--ok-line);
+  color: var(--green-ink);
+}
+.summaryTitle {
+  font-weight: 600;
+}
+.summaryBody {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.issueLabel {
+  font-weight: 600;
+}
+.issueMsg {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+.fix {
+  font-size: 12.5px;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+.fixFrom {
+  color: var(--red-ink);
+  text-decoration: line-through;
+}
+.fixTo {
+  color: var(--green-ink);
+}
+.confirmField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+.confirmLabel {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.confirmInput {
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0 10px;
+  background: var(--surface);
+  font-size: var(--fs-md);
+}
+.confirmInput:focus {
+  border-color: var(--focus);
+}
+.issueActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.doneNote {
+  color: var(--green-ink);
+  font-size: var(--fs-base);
+  align-self: center;
+}
+.fieldRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 0;
+  border-block-end: 1px solid var(--gray-bg);
+}
+.fieldLabel {
+  width: 84px;
+  flex: none;
+  font-size: 12.5px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+.fieldVal {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-base);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fieldConf {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.lowConf {
+  color: var(--red-ink);
+}
+.fieldsNote {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  padding: 8px 0;
+}
+.footBar {
+  flex: none;
+  padding: 12px 16px 20px;
+  background: var(--surface);
+  border-block-start: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---------- 完成 ---------- */
+.doneBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+.doneIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background: var(--green-bg);
+  display: grid;
+  place-items: center;
+  color: var(--green-ink);
+}
+.doneTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+.doneText {
+  color: var(--ink-2);
+}
+.doneActions {
+  width: 100%;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

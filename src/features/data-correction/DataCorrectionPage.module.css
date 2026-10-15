@@ -1,0 +1,510 @@
+/* 发票数据修正与补偿 */
+
+.headNote {
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+.sub {
+  color: var(--ink-2);
+}
+.small {
+  font-size: var(--fs-sm);
+}
+.tiny {
+  font-size: var(--fs-xs);
+}
+.strong {
+  font-weight: 600;
+}
+.h2 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.h2Lg {
+  font-size: 16px;
+  font-weight: 600;
+}
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+.headRowCenter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ---------- 修正流程 ---------- */
+.flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.flowStep {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.flowNum {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-sm);
+  flex: none;
+}
+.flowNumOn {
+  background: var(--accent);
+  color: #fff;
+}
+.flowNumOff {
+  background: var(--accent-soft);
+  color: var(--blue-ink);
+}
+.flowArrow {
+  color: var(--faint);
+  flex: none;
+}
+.flowArrow:dir(rtl) {
+  transform: scaleX(-1);
+}
+
+/* ---------- 主区：队列 + 工作区 ---------- */
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.queue {
+  flex: 1 1 250px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.queueHead {
+  padding: 14px 16px 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.queueItem {
+  display: block;
+  width: 100%;
+  text-align: start;
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-inline-start: 3px solid transparent;
+  background: var(--surface);
+  cursor: pointer;
+  padding: 11px 16px;
+}
+.queueItem:hover {
+  background: var(--accent-wash);
+}
+.queueItemOn {
+  border-inline-start-color: var(--accent);
+  background: var(--accent-wash);
+}
+.queueTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.queueId {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.queueFoot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line-soft);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.bad {
+  color: var(--red-ink);
+}
+
+.work {
+  flex: 999 1 640px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.workCard {
+  padding: 16px 18px;
+}
+
+/* 发票概要 */
+.invHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+}
+.invName {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.spacer {
+  flex: 1;
+}
+.metrics {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.metricVal {
+  font-size: 18px;
+  font-weight: 600;
+}
+.metricText {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.invBody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 16px;
+}
+.imageCol {
+  flex: 1 1 280px;
+  max-width: 380px;
+  min-width: 0;
+}
+.fieldsCol {
+  flex: 999 1 380px;
+  min-width: 0;
+}
+
+/* 票面影像（示意） */
+.paper {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(31, 35, 41, 0.08);
+  overflow: hidden;
+}
+.paper > * {
+  position: absolute;
+}
+.pTitle {
+  left: 8%;
+  top: 5%;
+  width: 46%;
+  height: 3%;
+  background: var(--ink);
+  opacity: 0.75;
+  border-radius: 2px;
+}
+.pSub {
+  left: 8%;
+  top: 10%;
+  width: 30%;
+  height: 2%;
+  background: var(--line-strong);
+  border-radius: 2px;
+}
+.pStamp {
+  left: 62%;
+  top: 5%;
+  width: 30%;
+  height: 9%;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+.pRule {
+  left: 8%;
+  top: 40%;
+  width: 84%;
+  height: 1px;
+  background: var(--line-strong);
+}
+.pLine {
+  left: 8%;
+  width: 84%;
+  height: 2%;
+  background: var(--line-soft);
+}
+.pFoot {
+  left: 8%;
+  top: 88%;
+  width: 40%;
+  height: 2%;
+  background: var(--line-strong);
+  border-radius: 2px;
+}
+.box {
+  border: 2px solid var(--accent);
+  background: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 0;
+}
+.boxBad {
+  border-color: var(--alert);
+}
+.boxSel {
+  border-color: var(--chart-3);
+  background: color-mix(in srgb, var(--chart-3) 18%, transparent);
+}
+.legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.legendItem {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.swatch {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--accent);
+}
+.swatchBad {
+  border-color: var(--alert);
+}
+.swatchSel {
+  border-color: var(--chart-3);
+  background: color-mix(in srgb, var(--chart-3) 18%, transparent);
+}
+
+/* 带边框的表格容器 */
+.tableBox {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tableBoxGap {
+  margin-top: 12px;
+}
+.right {
+  text-align: end !important;
+}
+.rowSel td {
+  background: var(--orange-bg);
+}
+.rowBtn {
+  display: block;
+  width: 100%;
+  text-align: start;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.rowBtnSel {
+  font-weight: 600;
+}
+.srcLabel {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  font-weight: 400;
+}
+.strike {
+  color: var(--red-ink);
+  text-decoration: line-through;
+}
+
+/* 字段更正面板 */
+.editor {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  background: var(--surface-2);
+}
+.editorLock {
+  border-color: color-mix(in srgb, var(--alert) 30%, var(--surface));
+  background: color-mix(in srgb, var(--red-bg) 45%, var(--surface));
+}
+.editorHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.editorTitle {
+  font-weight: 600;
+  font-size: var(--fs-md);
+}
+.why {
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.editGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.editActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+.afterNote {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.compList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.compItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.compText {
+  min-width: 0;
+  flex: 1 1 260px;
+}
+.desc {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.mt12 {
+  margin-top: 12px;
+}
+.mt14 {
+  margin-top: 14px;
+}
+.kickGap {
+  margin-bottom: 6px;
+}
+
+/* 前后对比 */
+.diffBefore {
+  background: var(--red-bg);
+}
+.diffAfter {
+  background: var(--green-bg);
+}
+.logBefore {
+  color: var(--red-ink);
+}
+.logAfter {
+  color: var(--green-ink);
+}
+.approveBtn {
+  min-height: 26px;
+  margin-inline-start: 6px;
+}
+
+/* 数据表说明卡 */
+.schemaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.schemaCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.schemaName {
+  font-weight: 500;
+}
+.schemaDesc {
+  color: var(--ink-2);
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+.noComps {
+  color: var(--muted);
+  padding: 8px 2px;
+}
+
+/* 规则矩阵 */
+.matrixCard {
+  padding: 18px 20px;
+}
+.top {
+  vertical-align: top !important;
+}
+.matrixCell {
+  vertical-align: top !important;
+  min-width: 150px;
+}
+.cellNote {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.compGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.when {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  margin-top: 2px;
+}
+.how {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+/* 表格最小宽度（窄屏时横向滚动） */
+.w620 {
+  min-width: 620px;
+}
+.w640 {
+  min-width: 640px;
+}
+.w760 {
+  min-width: 760px;
+}
+.w980 {
+  min-width: 980px;
+}
+.w1080 {
+  min-width: 1080px;
+}
+.catCol {
+  width: 220px;
+}

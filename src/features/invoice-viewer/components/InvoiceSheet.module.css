@@ -1,0 +1,139 @@
+/* 原件纸面：模拟扫描影像的纸张颜色（局部令牌，只用于票面影像） */
+.paper {
+  --paper-bg: #ffffff;
+  --paper-ink: #222222;
+  --paper-ink-2: #444444;
+  --paper-muted: #666666;
+  --paper-rule: #333333;
+  --paper-line: #bbbbbb;
+  --paper-dot: #cccccc;
+  --paper-head-bg: #f1f1f1;
+  --paper-note-ink: #9a4a00;
+  --paper-note-line: #c77d3a;
+
+  width: 560px;
+  height: 792px;
+  background: var(--paper-bg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  padding: 34px 38px;
+  font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+  color: var(--paper-ink);
+  overflow: hidden;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--paper-rule);
+  padding-bottom: 10px;
+}
+.title {
+  font-size: 19px;
+  font-weight: 600;
+}
+.pageNo {
+  font-size: 10.5px;
+  color: var(--paper-muted);
+  margin-top: 2px;
+}
+.meta {
+  text-align: right;
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+.party {
+  border: 1px solid var(--paper-line);
+  padding: 8px 10px;
+}
+.partyLabel {
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.items {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 10.5px;
+}
+.items thead tr {
+  background: var(--paper-head-bg);
+}
+.items th,
+.items td {
+  padding: 5px 6px;
+  border: 1px solid var(--paper-line);
+}
+.items th {
+  font-weight: 600;
+}
+.start {
+  text-align: left;
+}
+.end {
+  text-align: right;
+}
+
+.totalsWrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.totals {
+  width: 260px;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+}
+.grand {
+  border-top: 1px solid var(--paper-rule);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.payment {
+  margin-top: 22px;
+  font-size: 10px;
+  color: var(--paper-ink-2);
+  line-height: 1.7;
+}
+.handNote {
+  margin-top: 26px;
+  font-size: 10px;
+  color: var(--paper-note-ink);
+  transform: rotate(-4deg);
+  width: 220px;
+  border: 1px dashed var(--paper-note-line);
+  padding: 4px 8px;
+}
+
+.textBlock {
+  margin-top: 16px;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.textTitle {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.textLine {
+  border-bottom: 1px dotted var(--paper-dot);
+  padding: 3px 0;
+}

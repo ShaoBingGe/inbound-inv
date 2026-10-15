@@ -1,0 +1,178 @@
+/* 企业票池 */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.grow {
+  flex: 1;
+}
+.strong {
+  font-weight: 600;
+}
+.muted2 {
+  color: var(--ink-2);
+}
+.end {
+  text-align: end;
+}
+
+/* 标题栏：组织 / 期间切换 */
+.orgPick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+}
+.selCountry {
+  min-width: 150px;
+}
+.selEntity {
+  min-width: 200px;
+}
+.selPeriod {
+  min-width: 140px;
+}
+
+/* 当前组织条 */
+.orgBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--accent-wash);
+  border: 1px solid var(--pool-org-border);
+}
+.orgBarAlt {
+  background: var(--pool-org-alt-bg);
+  border-color: var(--pool-org-alt-border);
+}
+.orgNote {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+/* 状态卡片 */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+.statusCard {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.statusCard:hover {
+  border-color: var(--focus);
+}
+.statusCardOn {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cardDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: none;
+}
+.cardN {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.cardUnit {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--muted);
+}
+.cardAmt {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.cardSub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* 筛选 */
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px 12px;
+}
+.span2 {
+  grid-column: span 2;
+}
+.filterFoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+.resultLine {
+  color: var(--ink-2);
+}
+.resultLine b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* 列表 */
+.listTable {
+  min-width: 1180px;
+}
+.sub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.supName {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.totalCell {
+  font-weight: 500;
+}
+.docCell {
+  font-size: var(--fs-sm);
+}
+.emptyList {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+.listFoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+  border-end-start-radius: var(--radius);
+  border-end-end-radius: var(--radius);
+}
+
+@media (max-width: 520px) {
+  .span2 {
+    grid-column: auto;
+  }
+}

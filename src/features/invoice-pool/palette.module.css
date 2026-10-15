@@ -1,0 +1,35 @@
+/*
+ * 本模块用到、但 tokens.css 中尚无的颜色（与设计稿一致）。
+ * 挂在页面根节点与详情弹窗内容上（弹窗通过 portal 渲染，需要单独挂）。
+ * 建议后续提升到 src/styles/tokens.css（navy 状态色、翻译紫色系、影像纸张色）。
+ */
+.palette {
+  --pool-review: #f2b36d;
+  --pool-now: #e08a2e;
+  --pool-navy-bg: #e3e8f5;
+  --pool-navy-ink: #17306e;
+  --pool-org-border: #c9d7fa;
+  --pool-org-alt-bg: #fff7ec;
+  --pool-org-alt-border: #f5d4a6;
+  --pool-rev-border: #f3c3bf;
+  --pool-rev-bg: #fff8f7;
+  --pool-tr-bg: #f6f3fd;
+  --pool-tr-line: #e4dcf7;
+  --pool-tr-border: #b9a7ee;
+  --pool-viewer-bg: #e5e6eb;
+  --pool-paper-ink: #222222;
+  --pool-paper-rule: #333333;
+  --pool-paper-line: #bbbbbb;
+  --pool-paper-head: #f1f1f1;
+  --pool-paper-muted: #666666;
+  --pool-paper-sub: #444444;
+  --pool-paper-dot: #cccccc;
+  --pool-paper-bar: #999999;
+  --pool-paper-shadow: 0 3px 10px rgba(31, 35, 41, 0.16);
+}
+
+/* 「已付款」navy 标签（Chip 无此色调）；双类名提高优先级以覆盖 Chip 默认色 */
+.chipNavy.chipNavy {
+  background: var(--pool-navy-bg);
+  color: var(--pool-navy-ink);
+}

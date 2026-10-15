@@ -1,0 +1,111 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 10px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--ink);
+}
+.trigger:hover,
+.open {
+  border-color: var(--focus);
+  background: var(--accent-soft);
+}
+.dark {
+  background: transparent;
+  border-color: #4a4f58;
+  color: #e8eaed;
+}
+.dark:hover,
+.dark.open {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #9cbbfa;
+}
+.compact {
+  min-height: 36px;
+  padding: 0 9px;
+  border-radius: var(--radius);
+}
+.name {
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.menu {
+  width: 436px;
+  color: var(--ink);
+}
+.menuCompact {
+  width: 300px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.title {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  font-weight: 500;
+}
+.count {
+  font-size: 11px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 0;
+  border-inline-start: 2px solid transparent;
+  border-bottom: 1px solid #f0f1f2;
+  cursor: pointer;
+  text-align: start;
+  color: var(--ink);
+}
+.item:hover {
+  background: var(--accent-wash);
+}
+.item[aria-checked='true'] {
+  background: var(--accent-soft);
+  border-inline-start-color: var(--accent);
+  color: var(--blue-ink);
+  font-weight: 600;
+}
+.native {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.tag {
+  flex: none;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+  font-weight: 400;
+}
+.note {
+  padding: 10px 16px 12px;
+  border-top: 1px solid var(--line-soft);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  color: var(--muted);
+}

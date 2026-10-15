@@ -1,0 +1,13 @@
+/* 由容器启动脚本按环境变量生成，请勿手改。 */
+window.__APP_CONFIG__ = {
+  env: "${APP_ENV}",
+  apiBaseUrl: "${API_BASE_URL}",
+  agentPlatformBaseUrl: "${AGENT_PLATFORM_BASE_URL}",
+  dataMode: "${DATA_MODE}",
+  defaultLang: "${DEFAULT_LANG}",
+  auth: {
+    mode: "${AUTH_MODE}",
+    providers: ${OIDC_PROVIDERS_JSON},
+    claims: ${OIDC_CLAIMS_JSON}
+  }
+};

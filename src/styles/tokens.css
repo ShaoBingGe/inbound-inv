@@ -1,0 +1,77 @@
+/* 设计令牌：与设计稿（飞书风格：白底、墨色 #1F2329、强调蓝 #2C5AD4、警示红 #D93026）一致。
+   组件与页面只引用这些变量，不直接写色值。 */
+:root {
+  /* 文字 */
+  --ink: #1f2329;
+  --ink-2: #4e5359;
+  --muted: #646a73;
+  --faint: #8f959e;
+
+  /* 背景与边框 */
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f7f8fa;
+  --line: #dee0e3;
+  --line-soft: #eef0f2;
+  --line-strong: #d0d3d6;
+
+  /* 强调色 */
+  --accent: #2c5ad4;
+  --accent-hover: #1e44a8;
+  --accent-soft: #e8efff;
+  --accent-wash: #f0f4ff;
+  --focus: #5582f3;
+
+  /* 语义色（底 / 字） */
+  --alert: #d93026;
+  --red-bg: #fdeceb;
+  --red-ink: #b42318;
+  --orange-bg: #fff1e0;
+  --orange-ink: #8a4b00;
+  --green-bg: #e6f4ec;
+  --green-ink: #1d6b43;
+  --gray-bg: #f0f1f2;
+  --gray-ink: #4e5359;
+  --blue-bg: #e8efff;
+  --blue-ink: #1e44a8;
+  --purple-bg: #efeafb;
+  --purple-ink: #4a2e9b;
+
+  /* 图表色（顺序可区分明度，不只靠色相） */
+  --chart-1: #2c5ad4;
+  --chart-2: #9cb7f5;
+  --chart-3: #e8833a;
+  --chart-4: #1d8a5a;
+  --chart-5: #8f959e;
+
+  /* 字体 */
+  --font-sans: 'IBM Plex Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --fs-xs: 11.5px;
+  --fs-sm: 12px;
+  --fs-base: 13px;
+  --fs-md: 14px;
+  --fs-lg: 15px;
+  --fs-xl: 20px;
+
+  /* 尺寸 */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --control-h: 34px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --shadow-pop: 0 10px 28px rgba(31, 35, 41, 0.18);
+  --shadow-modal: 0 18px 48px rgba(31, 35, 41, 0.24);
+
+  /* 层级 */
+  --z-sticky: 20;
+  --z-drawer: 50;
+  --z-modal: 60;
+  --z-pop: 80;
+  --z-toast: 90;
+}

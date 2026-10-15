@@ -1,0 +1,40 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: invoice-hub-dev
+resources:
+  - ../../base
+images:
+  - name: invoice-hub-web
+    newName: registry.example.com/invoice-hub/invoice-hub-web
+    newTag: dev
+patches:
+  - target: { kind: Deployment, name: invoice-hub-web }
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+  - target: { kind: HorizontalPodAutoscaler, name: invoice-hub-web }
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+      - op: replace
+        path: /spec/maxReplicas
+        value: 2
+  - target: { kind: Ingress, name: invoice-hub-web }
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: invoice-hub-dev.example.com
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: invoice-hub-dev.example.com
+  # dev 环境使用示例数据，后端未就绪时也能演示
+  - target: { kind: ConfigMap, name: invoice-hub-web-config }
+    patch: |-
+      - op: replace
+        path: /data/APP_ENV
+        value: dev
+      - op: replace
+        path: /data/DATA_MODE
+        value: mock

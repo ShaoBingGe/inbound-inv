@@ -1,0 +1,322 @@
+.headerNote {
+  color: var(--muted);
+}
+
+.body {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 22px var(--space-6) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.col420 {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+.col400 {
+  flex: 1 1 400px;
+  min-width: 0;
+}
+.col480 {
+  flex: 1 1 480px;
+  min-width: 0;
+}
+
+.card {
+  padding: 16px 20px;
+}
+
+.headLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+.h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.h2sm {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.muted {
+  color: var(--muted);
+}
+.desc {
+  color: var(--muted);
+  margin-top: 2px;
+}
+.spacer {
+  flex: 1;
+}
+
+/* 闭环流程 */
+.stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.stageBtn {
+  display: block;
+  width: 100%;
+  text-align: start;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 12px;
+  cursor: pointer;
+}
+.stageBtn:hover {
+  border-color: var(--focus);
+}
+.stageBtn[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.stageValue {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.stageSub {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.track {
+  height: 4px;
+  background: var(--line-soft);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.trackFill {
+  height: 4px;
+}
+.stageDetail {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+.stageTitle {
+  font-weight: 600;
+}
+.stageDesc {
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.ruleList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ruleItem {
+  display: flex;
+  gap: 8px;
+  font-size: 12.5px;
+}
+.bullet {
+  color: var(--accent);
+}
+
+/* 修正来源 */
+.sourceList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.sourceRow {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 120px;
+  gap: 10px;
+  align-items: center;
+}
+.sourceName {
+  font-weight: 500;
+}
+.sourceSub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.stackBar {
+  display: flex;
+  height: 14px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--line-soft);
+}
+.segOk {
+  background: var(--accent);
+}
+.segPend {
+  background: var(--chart-2);
+}
+.segRej {
+  background: var(--chart-3);
+}
+.sourceNum {
+  font-size: var(--fs-sm);
+  text-align: end;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 10px;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* 内嵌表格外框 */
+.tableBox {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.nowrap,
+.tableBox td.nowrap,
+.recTable td.nowrap {
+  white-space: nowrap;
+}
+.strong {
+  font-weight: 600;
+}
+.medium {
+  font-weight: 500;
+}
+.soft {
+  color: var(--ink-2);
+}
+.soft125 {
+  color: var(--ink-2);
+  font-size: 12.5px;
+}
+.end {
+  text-align: end;
+}
+.subKick {
+  margin: 12px 0 6px;
+}
+.conflict {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 5px 0;
+  border-top: 1px solid var(--gray-bg);
+  font-size: 12.5px;
+}
+.conflictWhen {
+  color: var(--orange-ink);
+  flex: none;
+}
+
+/* 修正记录 */
+.recHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 16px 20px 12px;
+}
+.recTable {
+  border-top: 1px solid var(--line);
+}
+.filterCount {
+  color: var(--muted);
+}
+.small {
+  font-size: var(--fs-sm);
+}
+.smallMuted {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.tinyMuted {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.smallSoft {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.before {
+  color: var(--red-ink);
+}
+.after {
+  color: var(--green-ink);
+}
+.actBtn {
+  min-height: 28px;
+}
+
+.policyNote {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 10px;
+}
+
+/* 修正热点 */
+.hotList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hotRow {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 110px;
+  gap: 10px;
+  align-items: center;
+  font-size: 12.5px;
+}
+.hotTrack {
+  height: 8px;
+  background: var(--line-soft);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.hotFill {
+  height: 8px;
+}
+
+@media (max-width: 640px) {
+  .body {
+    padding-inline: var(--space-4);
+  }
+  .sourceRow,
+  .hotRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .sourceNum,
+  .hotRow > :last-child {
+    text-align: start;
+  }
+}

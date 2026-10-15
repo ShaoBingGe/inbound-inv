@@ -1,0 +1,18 @@
+# 前端容器只接收来自 Ingress 控制器的流量，且不需要任何出站连接（浏览器直接访问 API 与 IdP）
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: invoice-hub-web
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: web
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - port: 8080
+  egress: []

@@ -1,0 +1,328 @@
+/* 邮箱采集与识别 */
+
+div.body {
+  max-width: 1320px;
+  width: 100%;
+  margin-inline: auto;
+  padding: 22px var(--space-6) 48px;
+  gap: 18px;
+}
+
+/* 标题栏统计 */
+.headStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-inline-end: 8px;
+}
+.headStatVal {
+  font-size: 16px;
+  font-weight: 600;
+}
+.headStatSub {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  color: var(--green-ink);
+}
+
+/* 通用 */
+.h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.h3 {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.rowHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+}
+.grow {
+  flex: 1;
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.strong {
+  font-weight: 600;
+}
+.medium {
+  font-weight: 500;
+}
+.ink2 {
+  color: var(--ink-2);
+}
+.muted {
+  color: var(--muted);
+}
+.sub {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.end {
+  text-align: end !important;
+}
+.mt12 {
+  margin-top: 12px;
+}
+.mt14 {
+  margin-top: 14px;
+}
+.mb6 {
+  margin-bottom: 6px;
+}
+.btnRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.full {
+  width: 100%;
+}
+.boxed {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* 绑定向导 */
+.wizard {
+  padding: 18px 20px;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--surface));
+}
+.providerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.providerCard {
+  display: block;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.providerCard:hover {
+  border-color: var(--focus);
+}
+.providerOn {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.providerHow {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+.authRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 14px;
+}
+.scopeBox {
+  flex: 1 1 320px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.scopeRow {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--gray-bg);
+}
+.scopeKey {
+  color: var(--blue-ink);
+}
+.note {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  margin-top: 6px;
+}
+.authFields {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lbl {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.successBox {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--green-bg);
+  color: var(--green-ink);
+}
+
+/* 员工邮箱表 */
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 16px 20px 12px;
+}
+.tableTop {
+  border-top: 1px solid var(--line);
+}
+.boxTable {
+  min-width: 1020px;
+}
+.boxTable td {
+  padding-block: 9px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.rowOn td {
+  background: var(--accent-wash);
+}
+.nameBtn {
+  color: var(--ink);
+  font-weight: 600;
+}
+.nameBtn:hover {
+  color: var(--ink);
+}
+
+/* 规则列表 + 编辑 */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.ruleList {
+  flex: 1 1 320px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.ruleListHead {
+  padding: 14px 16px 10px;
+}
+.descSm {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.ruleRow {
+  display: block;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  border-inline-start: 3px solid transparent;
+  background: var(--surface);
+  padding: 11px 16px;
+}
+.ruleRow:hover {
+  background: color-mix(in srgb, var(--accent-wash) 60%, var(--surface));
+}
+.ruleRowOn,
+.ruleRowOn:hover {
+  border-inline-start-color: var(--accent);
+  background: var(--accent-wash);
+}
+.ruleFrom {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.ruleSup {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.ruleChips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+}
+.ruleListFoot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.editor {
+  flex: 999 1 560px;
+  min-width: 0;
+  padding: 16px 20px;
+}
+.stepKick {
+  margin: 18px 0 8px;
+}
+.stepKickFirst {
+  margin-top: 16px;
+}
+.grid220 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.grid200 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.docTable {
+  min-width: 620px;
+}
+.testTable {
+  min-width: 680px;
+}
+.docTable td,
+.testTable td {
+  padding-block: 9px;
+}
+.w70 {
+  width: 70px;
+}
+.supCheck {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+/* 效率功能 */
+.featGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.featItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.featText {
+  flex: 1;
+  min-width: 0;
+}
+.featDesc {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.feats {
+  padding: 16px 20px;
+}

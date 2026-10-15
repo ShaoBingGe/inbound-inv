@@ -1,0 +1,217 @@
+/* 识别效果看板。图表专用色在此定义为局部变量（设计稿原色），其余用全局令牌。 */
+.page {
+  --rb-line-1: var(--blue-ink);
+  --rb-line-2: #e08a2e;
+  --rb-line-3: #6f95ec;
+  --rb-line-4: var(--orange-ink);
+  --rb-line-5: var(--ink);
+  --rb-off: #c9cdd4;
+  --rb-axis: #c9cdd4;
+  --rb-heat-deep-ink: #0f2a6b;
+}
+
+.body {
+  max-width: 1320px;
+  margin-inline: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 22px;
+  padding-bottom: 48px;
+  gap: 18px;
+}
+
+.block {
+  padding: var(--space-4) var(--space-5);
+}
+
+.muted {
+  color: var(--muted);
+}
+.ink2 {
+  color: var(--ink-2);
+}
+.strong {
+  font-weight: 600;
+}
+.medium {
+  font-weight: 500;
+}
+.end {
+  text-align: end;
+}
+
+/* 筛选 */
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+}
+.pillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  cursor: pointer;
+}
+.pill:hover {
+  border-color: var(--focus);
+}
+.pill[aria-pressed='true'] {
+  background: var(--accent-wash);
+  border-color: var(--accent);
+}
+.pillDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  flex: none;
+}
+
+/* 区块标题 */
+.blockHead,
+.heatHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+.heatHead {
+  padding: var(--space-4) var(--space-5) var(--space-3);
+}
+.blockTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 趋势图 */
+.chartRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.yTicks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 240px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+  width: 44px;
+  flex: none;
+}
+.chartMain {
+  flex: 1;
+  min-width: 0;
+}
+.chartMain svg {
+  display: block;
+}
+.gridLine {
+  stroke: var(--line-soft);
+}
+.axisLine {
+  stroke: var(--rb-axis);
+}
+.xLabels {
+  display: grid;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* 图例 */
+.legendGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.legendCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+.legendHead {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.legendSwatch {
+  width: 18px;
+  height: 0;
+  flex: none;
+}
+.legendValues {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 4px;
+}
+.legendLast {
+  font-size: 18px;
+  font-weight: 600;
+}
+.legendNote {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+/* 热力表 */
+.heatBody {
+  border-top: 1px solid var(--line);
+}
+.heatTable {
+  min-width: 980px;
+}
+.heatTable th.end,
+.heatTable td.end {
+  text-align: end;
+}
+.cellDelta {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+/* 版本记录 */
+.releases {
+  display: flex;
+  flex-direction: column;
+}
+.releaseRow {
+  display: grid;
+  grid-template-columns: 110px 110px minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line-soft);
+  align-items: baseline;
+}
+.releaseMeta {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  margin-top: 2px;
+}
+.releaseLink {
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .releaseRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}

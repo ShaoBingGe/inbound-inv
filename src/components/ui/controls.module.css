@@ -1,0 +1,244 @@
+/* Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: var(--control-h);
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.12s, border-color 0.12s;
+}
+.btn:hover {
+  border-color: var(--focus);
+  background: var(--accent-wash);
+  text-decoration: none;
+  color: var(--ink);
+}
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+.danger {
+  color: var(--red-ink);
+  border-color: #f0b7b2;
+}
+.danger:hover {
+  background: var(--red-bg);
+  border-color: var(--alert);
+  color: var(--red-ink);
+}
+.ghost {
+  border-color: transparent;
+  background: transparent;
+}
+.ghost:hover {
+  background: var(--accent-wash);
+  border-color: transparent;
+}
+.sm {
+  min-height: 28px;
+  padding: 0 9px;
+  font-size: var(--fs-sm);
+}
+.lg {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: var(--fs-md);
+}
+.block {
+  width: 100%;
+}
+.iconOnly {
+  width: var(--control-h);
+  padding: 0;
+}
+
+/* Link-like button */
+.linkBtn {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: start;
+}
+.linkBtn:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Inputs */
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: var(--control-h);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 10px;
+  background: var(--surface);
+}
+.select {
+  width: auto;
+  padding: 0 8px;
+}
+.textarea {
+  padding: 8px 10px;
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.6;
+}
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--faint);
+}
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(85, 130, 243, 0.18);
+}
+.invalid {
+  border-color: var(--alert) !important;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.fieldInline {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.label {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  font-weight: 500;
+}
+.hint {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.error {
+  font-size: var(--fs-xs);
+  color: var(--red-ink);
+}
+
+/* Segmented */
+.seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--surface);
+}
+.seg button {
+  border: 0;
+  border-inline-end: 1px solid var(--line-strong);
+  background: transparent;
+  padding: 0 12px;
+  min-height: 32px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.seg button:last-child {
+  border-inline-end: 0;
+}
+.seg button:hover {
+  background: var(--accent-wash);
+}
+.seg button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.seg button[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--blue-ink);
+  font-weight: 600;
+}
+
+/* Switch */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.switchTrack {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--line-strong);
+  transition: background 0.15s;
+  flex: none;
+}
+.switchTrack::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  inset-inline-start: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.switch input:checked + .switchTrack {
+  background: var(--accent);
+}
+.switch input:checked + .switchTrack::after {
+  transform: translateX(14px);
+}
+[dir='rtl'] .switch input:checked + .switchTrack::after {
+  transform: translateX(-14px);
+}
+.switch input:focus-visible + .switchTrack {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  margin: 0;
+}

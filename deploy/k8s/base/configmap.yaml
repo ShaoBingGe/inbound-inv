@@ -1,0 +1,29 @@
+# 运行时配置：容器启动时渲染为 /config.js。修改后滚动重启 Deployment 生效
+#   kubectl -n <ns> rollout restart deploy/invoice-hub-web
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: invoice-hub-web-config
+data:
+  APP_ENV: "prod"
+  API_BASE_URL: "/api"
+  AGENT_PLATFORM_BASE_URL: "/agent-api"
+  DATA_MODE: "live"
+  DEFAULT_LANG: "zh"
+  AUTH_MODE: "oidc"
+  # 身份提供方，可配置多个；acrValues 用于要求 IdP 额外认证（MFA）
+  OIDC_PROVIDERS_JSON: |
+    [
+      {
+        "id": "corp",
+        "name": "企业统一身份认证",
+        "authority": "https://idp.example.com/realms/invoice-hub",
+        "clientId": "invoice-hub-web",
+        "scope": "openid profile email offline_access",
+        "acrValues": "mfa",
+        "extraQueryParams": {}
+      }
+    ]
+  # 令牌声明映射（支持点路径，如 realm_access.roles）
+  OIDC_CLAIMS_JSON: |
+    {"roles":"roles","countries":"dc_scope","tenant":"tenant","name":"name","email":"email"}

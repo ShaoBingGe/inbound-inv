@@ -1,0 +1,112 @@
+/* 页头 */
+.headMeta {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-base);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.supPicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 页面主体 */
+.body {
+  max-width: 1280px;
+  margin-inline: auto;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 18px;
+}
+
+/* 概览 */
+.overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+.overviewCard {
+  padding: 14px 16px;
+}
+
+/* 上传 */
+.upload {
+  padding: 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.dropZone {
+  flex: 1 1 360px;
+  min-width: 0;
+  border: 1.5px dashed var(--chart-2);
+  border-radius: var(--radius);
+  padding: 18px;
+  background: var(--accent-wash);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.dropIcon {
+  flex: none;
+  color: var(--accent);
+}
+.dropText {
+  min-width: 0;
+}
+.strong {
+  font-weight: 600;
+}
+.ink2 {
+  color: var(--ink-2);
+}
+.spacer {
+  flex: 1;
+}
+.tips {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+.tipsTitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.tip {
+  display: flex;
+  gap: 8px;
+  color: var(--ink-2);
+  padding: 2px 0;
+}
+.tipDot {
+  color: var(--accent);
+}
+.fileInput {
+  display: none;
+}
+
+/* 底部两栏 */
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+  gap: 18px;
+}
+
+/* 「我的发票」卡片头 */
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 16px 20px 12px;
+}
+.cardTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.cardDesc {
+  color: var(--muted);
+}

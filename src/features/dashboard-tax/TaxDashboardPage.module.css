@@ -1,0 +1,345 @@
+/* 税务统计看板。图表专用色只在本页使用，定义为局部变量（全局令牌中暂无对应色）。 */
+.body {
+  --tb-state-1: #a9c1f5;
+  --tb-state-2: #6f95ec;
+  --tb-state-3: var(--accent);
+  --tb-state-4: #17306e;
+  --tb-state-5: #c9cdd4;
+  --tb-state-6: var(--red-ink);
+  --tb-noncredit: #c9cdd4;
+  --tb-withheld: #e08a2e;
+  --tb-last-year: #9aa0a8;
+  --tb-axis: #c9cdd4;
+
+  max-width: 1320px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-inline: auto;
+  gap: 18px;
+  padding-block: 22px 48px;
+}
+
+.headerField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* KPI */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.kpiCard {
+  padding: 14px 16px;
+}
+.kpiSub {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+.kpiDelta {
+  font-weight: 500;
+}
+
+/* 两列布局 */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.colWide {
+  flex: 1 1 480px;
+  min-width: 0;
+}
+.colNarrow {
+  flex: 1 1 400px;
+  min-width: 0;
+}
+.sectionPad {
+  padding: 16px 20px;
+}
+
+.panelHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+/* 进项税状态 */
+.stateBar {
+  display: flex;
+  margin-top: 12px;
+  height: 22px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.stateSeg {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: -2px;
+}
+.stateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.stateItem {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: start;
+  cursor: pointer;
+}
+.stateItem:hover .stateLabel {
+  text-decoration: underline;
+}
+.stateItem[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex: none;
+  margin-top: 4px;
+}
+.stateLabel {
+  display: block;
+  font-weight: 500;
+}
+.stateMeta {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+/* 税种 */
+.taxList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.taxRow {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 150px;
+  gap: 10px;
+  align-items: center;
+  font-size: 12.5px;
+}
+.taxName {
+  display: block;
+  font-weight: 500;
+}
+.taxSub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.taxBar {
+  display: flex;
+  height: 12px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--line-soft);
+}
+.barCredit {
+  background: var(--accent);
+}
+.barNon {
+  background: var(--tb-noncredit);
+}
+.barWithheld {
+  background: var(--tb-withheld);
+}
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  margin-top: 10px;
+}
+.legendTight {
+  margin-top: 6px;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legendBox {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.legendLine {
+  width: 14px;
+  height: 2px;
+  background: var(--accent);
+}
+.legendDash {
+  width: 14px;
+  border-top: 2px dashed var(--tb-last-year);
+}
+.legendRev {
+  width: 10px;
+  height: 10px;
+  background: var(--red-ink);
+  opacity: 0.7;
+}
+
+/* 表格卡片 */
+.tableHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 16px 20px 12px;
+}
+.tableHeadCompact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding: 14px 18px 10px;
+}
+.h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.h2Lg {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.desc {
+  color: var(--muted);
+}
+.spacer {
+  flex: 1;
+}
+.tableTop {
+  border-top: 1px solid var(--line);
+}
+.tblCountry {
+  min-width: 1180px;
+}
+.tblRisk {
+  min-width: 420px;
+}
+.tblDrill {
+  min-width: 980px;
+}
+.right,
+.tbl .right {
+  text-align: end;
+}
+.tbl td.wrap {
+  white-space: normal;
+}
+.cellName {
+  font-weight: 500;
+}
+.cellSub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.wrap .cellName,
+.wrap .cellSub {
+  white-space: normal;
+}
+.soft {
+  color: var(--ink-2);
+}
+.neg {
+  color: var(--red-ink);
+}
+.action {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.filing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.filingTrack {
+  width: 90px;
+  height: 8px;
+  background: var(--line-soft);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.filingBar {
+  height: 8px;
+}
+.filingPct {
+  font-size: var(--fs-sm);
+}
+.rowBtn {
+  min-height: 28px;
+}
+
+/* 趋势图 */
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+.gridLine {
+  stroke: var(--line-soft);
+}
+.baseLine {
+  stroke: var(--tb-axis);
+}
+.axisText {
+  font-size: 11px;
+  fill: var(--muted);
+}
+.lineLy {
+  fill: none;
+  stroke: var(--tb-last-year);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+.lineCur {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+.revBar {
+  fill: var(--red-ink);
+  opacity: 0.7;
+}
+.months {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  /* 与 SVG 左侧 40/600 的坐标留白对齐 */
+  padding-inline-start: calc(100% * 40 / 600);
+  padding-inline-end: calc(100% * 20 / 600);
+  font-size: 11px;
+  color: var(--muted);
+}
+.months span {
+  text-align: center;
+}
+.loadingRow {
+  padding: 24px 20px;
+  color: var(--muted);
+}

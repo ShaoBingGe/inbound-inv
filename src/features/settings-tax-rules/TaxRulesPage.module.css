@@ -1,0 +1,254 @@
+/* 税务规则设置 */
+
+.headerNote {
+  color: var(--muted);
+}
+
+/* 国家页签条（紧贴页头，白底） */
+.countryBar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 0 var(--space-6);
+  overflow-x: auto;
+}
+.countryBar > div {
+  flex-wrap: nowrap;
+  border-bottom: 0;
+}
+
+.body {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 18px;
+  padding-bottom: 48px;
+}
+
+/* 卡片头 */
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 16px 20px 12px;
+}
+.headSm {
+  padding: 14px 18px 10px;
+}
+.headBase {
+  align-items: baseline;
+}
+.h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.h2Sm {
+  margin: 0;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+.desc {
+  color: var(--muted);
+}
+.owner {
+  margin-inline-start: 0.25em;
+}
+.spacer {
+  flex: 1;
+}
+
+/* 税制概览 */
+.overview {
+  padding: 16px 20px;
+}
+.overviewHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.fact {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  min-width: 0;
+}
+.factValue {
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* 两栏：税种 + 逆向 */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-start;
+}
+.colTaxes {
+  flex: 1 1 520px;
+  min-width: 0;
+}
+.colReverse {
+  flex: 1 1 400px;
+  min-width: 0;
+}
+
+/* 表格容器：顶部分隔线 */
+.tableTop {
+  border-top: 1px solid var(--line);
+}
+.tbl td {
+  vertical-align: top;
+}
+.minW640 {
+  min-width: 640px;
+}
+.minW420 {
+  min-width: 420px;
+}
+.minW1080 {
+  min-width: 1080px;
+}
+.minW760 {
+  min-width: 760px;
+}
+.tbl .nowrap {
+  white-space: nowrap;
+}
+.condCell {
+  min-width: 160px;
+}
+.taxName {
+  min-width: 120px;
+}
+.strong {
+  font-weight: 500;
+}
+.sub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.soft {
+  color: var(--ink-2);
+  font-size: 12.5px;
+}
+.softSm {
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+}
+.tbl .smallNum {
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+.ruleText {
+  min-width: 260px;
+}
+.param {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+
+/* 预提 / 代扣 */
+.wht {
+  padding: 12px 18px;
+}
+.whtTitle {
+  margin-bottom: 6px;
+}
+.whtRow {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+  border-top: 1px solid var(--gray-bg);
+  font-size: 12.5px;
+}
+.whtKey {
+  font-weight: 500;
+  flex: none;
+}
+.whtVal {
+  color: var(--ink-2);
+}
+
+/* 规则模拟 */
+.sim {
+  padding: 16px 20px;
+}
+.simInputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.simField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.simOut {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 14px;
+  align-items: flex-start;
+}
+.simTableBox {
+  flex: 1 1 320px;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tbl .amtCol {
+  text-align: end;
+}
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+}
+.totals b {
+  font-weight: 600;
+}
+.creditVal {
+  color: var(--green-ink);
+}
+.notes {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+}
+.noteCode {
+  color: var(--blue-ink);
+  flex: none;
+  font-size: var(--fs-xs);
+}
+.simBusy {
+  opacity: 0.6;
+  transition: opacity 0.12s;
+}
