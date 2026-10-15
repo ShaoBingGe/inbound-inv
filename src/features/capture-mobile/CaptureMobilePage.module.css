@@ -43,13 +43,6 @@
 
 /* ---------- 手机外壳 ---------- */
 .phone {
-  /* 本模块局部色（设计稿中的提示底色、取景器与纸张示意），建议提升为全局令牌 */
-  --warn-wash: #fff7ec;
-  --warn-line: #f5d4a6;
-  --ok-line: #b7dec7;
-  --cam-bg: #141518;
-  --paper: #f7f6f2;
-
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -230,7 +223,7 @@
 /* ---------- 拍票 ---------- */
 .cam {
   flex: 1;
-  background: var(--cam-bg);
+  background: var(--camera-bg);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -248,7 +241,7 @@
 .paper {
   position: absolute;
   inset: 92px 62px 142px;
-  background: var(--paper);
+  background: var(--mobile-sheet);
   border-radius: 3px;
   transform: rotate(-3deg);
   opacity: 0.92;
@@ -418,13 +411,13 @@
   padding: 12px 14px;
 }
 .summaryWarn {
-  background: var(--warn-wash);
-  border-color: var(--warn-line);
+  background: var(--orange-wash);
+  border-color: var(--orange-border);
   color: var(--orange-ink);
 }
 .summaryOk {
   background: var(--green-bg);
-  border-color: var(--ok-line);
+  border-color: var(--green-border);
   color: var(--green-ink);
 }
 .summaryTitle {

@@ -1,26 +1,6 @@
-/* 发票全生命周期。设计稿里 tokens.css 尚未覆盖的颜色以局部变量定义在 .page 上（建议后续提升为全局令牌）。 */
+/* 发票全生命周期（配色令牌见 src/styles/tokens.css） */
 .page {
-  --lc-cur: #e08a2e;
-  --lc-todo-ink: #9aa0a8;
-  --lc-rev-border: #f3c3bf;
-  --lc-rev-bg: #fff8f7;
-  --lc-wash: #fafbfc;
-  --lc-viewer-bg: #e5e6eb;
-  --lc-tr-bg: #f6f3fd;
-  --lc-tr-line: #e4dcf7;
-  --lc-tr-border: #b9a7ee;
-  --lc-divider: #f0f1f2;
   /* 原件影像「纸面」配色（模拟打印件，不随主题变化） */
-  --paper-bg: #ffffff;
-  --paper-ink: #222222;
-  --paper-rule: #333333;
-  --paper-line: #bbbbbb;
-  --paper-head: #f1f1f1;
-  --paper-muted: #666666;
-  --paper-soft: #444444;
-  --paper-dot: #cccccc;
-  --paper-thumb: #999999;
-  --paper-shadow: 0 3px 10px rgba(31, 35, 41, 0.16);
 
   display: flex;
   flex-direction: column;
@@ -133,7 +113,7 @@
   padding-top: 18px;
   --dot: var(--line-strong);
   --rail: var(--line-strong);
-  --label: var(--lc-todo-ink);
+  --label: var(--disabled-ink);
 }
 .step[data-state='done'] {
   --dot: var(--accent);
@@ -141,7 +121,7 @@
   --label: var(--ink);
 }
 .step[data-state='cur'] {
-  --dot: var(--lc-cur);
+  --dot: var(--amber);
   --label: var(--orange-ink);
 }
 .step[data-state='rev'] {
@@ -217,7 +197,7 @@
   background: var(--accent);
 }
 .legendCur {
-  background: var(--lc-cur);
+  background: var(--amber);
 }
 .legendTodo {
   background: var(--line-strong);
@@ -284,9 +264,9 @@
   flex: 1;
   min-width: 0;
   padding: 10px 12px;
-  border: 1px solid var(--lc-rev-border);
+  border: 1px solid var(--red-border);
   border-radius: var(--radius);
-  background: var(--lc-rev-bg);
+  background: var(--red-wash);
 }
 .revKind {
   font-weight: 600;
@@ -313,7 +293,7 @@
   margin-top: 12px;
   padding: 10px 12px;
   border-radius: var(--radius);
-  background: var(--lc-wash);
+  background: var(--wash);
 }
 .netLine {
   display: flex;
@@ -364,7 +344,7 @@
   gap: 10px;
   font-size: 12.5px;
   padding: 5px 0;
-  border-top: 1px solid var(--lc-divider);
+  border-top: 1px solid var(--gray-bg);
 }
 .ruleKey {
   color: var(--muted);
@@ -470,7 +450,7 @@
 .viewer {
   height: 640px;
   overflow: auto;
-  background: var(--lc-viewer-bg);
+  background: var(--image-backdrop);
   border-radius: var(--radius);
 }
 .paperBox {
@@ -544,7 +524,7 @@
   font-size: 10.5px;
 }
 .paperTable th {
-  background: var(--paper-head);
+  background: var(--paper-head-bg);
   padding: 5px 6px;
   border: 1px solid var(--paper-line);
   font-weight: 600;
@@ -581,7 +561,7 @@
 .payInfo {
   margin-top: 22px;
   font-size: 10px;
-  color: var(--paper-soft);
+  color: var(--paper-ink-2);
   line-height: 1.7;
 }
 .textPage {
@@ -652,7 +632,7 @@
   align-items: center;
   padding: 10px 12px;
   border-bottom: 1px solid var(--line);
-  background: var(--lc-wash);
+  background: var(--wash);
 }
 .dataTitle {
   font-weight: 600;
@@ -660,16 +640,16 @@
 .dataHead .trOn,
 .dataHead .trOn:hover {
   background: var(--purple-bg);
-  border-color: var(--lc-tr-border);
+  border-color: var(--purple-border);
   color: var(--purple-ink);
 }
 .trNote {
   flex: none;
   padding: 7px 12px;
-  background: var(--lc-tr-bg);
+  background: var(--purple-wash);
   color: var(--purple-ink);
   font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--lc-tr-line);
+  border-bottom: 1px solid var(--purple-line);
 }
 .dataBody {
   height: 620px;
@@ -688,7 +668,7 @@
   grid-template-columns: 150px minmax(0, 1fr);
   gap: 10px;
   padding: 7px 0;
-  border-bottom: 1px solid var(--lc-divider);
+  border-bottom: 1px solid var(--gray-bg);
 }
 .dataKey {
   font-size: 12.5px;

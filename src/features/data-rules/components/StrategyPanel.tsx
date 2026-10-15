@@ -6,10 +6,10 @@ import type { CountryProfile, CountryStrategy, TriggerDef, TriggerKey } from '..
 import s from '../DataRulesPage.module.css';
 
 export const MIX_COLOR: Record<MixKind, string> = {
-  flood: 'var(--dr-warn)',
+  flood: 'var(--chart-3)',
   random: 'var(--accent)',
-  template: 'var(--dr-bar)',
-  synthetic: 'var(--dr-synth)',
+  template: 'var(--blue-mid)',
+  synthetic: 'var(--blue-light)',
 };
 
 /** 某国 · 采集与检测策略 */

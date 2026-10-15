@@ -74,7 +74,7 @@ export function ExceptionDrawer({ inv, onClose }: { inv: ExcInvoice | null; onCl
                     className={s.timingFill}
                     style={{
                       width: `${((x.s / tmax) * 100).toFixed(1)}%`,
-                      background: x.s === tmax ? 'var(--alert)' : 'var(--gd-timing)',
+                      background: x.s === tmax ? 'var(--alert)' : 'var(--blue-mid)',
                     }}
                   />
                 </div>

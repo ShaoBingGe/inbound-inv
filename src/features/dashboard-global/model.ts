@@ -18,17 +18,17 @@ export interface StageDef {
   k: StageKey;
   label: string;
   group: GroupKey;
-  /** CSS 颜色（局部令牌，见 GlobalDashboardPage.module.css .palette） */
+  /** CSS 颜色（令牌见 src/styles/tokens.css） */
   c: string;
 }
 
 export const STAGES: StageDef[] = [
-  { k: 'collect', label: '采集中', group: 'pending', c: 'var(--gd-stage-collect)' },
-  { k: 'taxsync', label: '税局票池同步中', group: 'pending', c: 'var(--gd-stage-taxsync)' },
-  { k: 'ap', label: 'AP 单审核中', group: 'review', c: 'var(--gd-stage-ap)' },
-  { k: 'exp', label: '费控单审核中', group: 'review', c: 'var(--gd-stage-exp)' },
-  { k: 'posted', label: '已入账', group: 'posted', c: 'var(--gd-stage-posted)' },
-  { k: 'paid', label: '已付款', group: 'paid', c: 'var(--gd-stage-paid)' },
+  { k: 'collect', label: '采集中', group: 'pending', c: 'var(--blue-light)' },
+  { k: 'taxsync', label: '税局票池同步中', group: 'pending', c: 'var(--blue-mid)' },
+  { k: 'ap', label: 'AP 单审核中', group: 'review', c: 'var(--orange-soft)' },
+  { k: 'exp', label: '费控单审核中', group: 'review', c: 'var(--orange-deep)' },
+  { k: 'posted', label: '已入账', group: 'posted', c: 'var(--accent)' },
+  { k: 'paid', label: '已付款', group: 'paid', c: 'var(--navy)' },
 ];
 
 export interface GroupDef {

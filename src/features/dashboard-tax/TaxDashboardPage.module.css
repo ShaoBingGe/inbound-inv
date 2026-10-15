@@ -1,16 +1,5 @@
-/* 税务统计看板。图表专用色只在本页使用，定义为局部变量（全局令牌中暂无对应色）。 */
+/* 税务统计看板（配色令牌见 src/styles/tokens.css） */
 .body {
-  --tb-state-1: #a9c1f5;
-  --tb-state-2: #6f95ec;
-  --tb-state-3: var(--accent);
-  --tb-state-4: #17306e;
-  --tb-state-5: #c9cdd4;
-  --tb-state-6: var(--red-ink);
-  --tb-noncredit: #c9cdd4;
-  --tb-withheld: #e08a2e;
-  --tb-last-year: #9aa0a8;
-  --tb-axis: #c9cdd4;
-
   max-width: 1320px;
   width: 100%;
   box-sizing: border-box;
@@ -160,10 +149,10 @@
   background: var(--accent);
 }
 .barNon {
-  background: var(--tb-noncredit);
+  background: var(--axis);
 }
 .barWithheld {
-  background: var(--tb-withheld);
+  background: var(--amber);
 }
 .legend {
   display: flex;
@@ -193,7 +182,7 @@
 }
 .legendDash {
   width: 14px;
-  border-top: 2px dashed var(--tb-last-year);
+  border-top: 2px dashed var(--disabled-ink);
 }
 .legendRev {
   width: 10px;
@@ -306,7 +295,7 @@
   stroke: var(--line-soft);
 }
 .baseLine {
-  stroke: var(--tb-axis);
+  stroke: var(--axis);
 }
 .axisText {
   font-size: 11px;
@@ -314,7 +303,7 @@
 }
 .lineLy {
   fill: none;
-  stroke: var(--tb-last-year);
+  stroke: var(--disabled-ink);
   stroke-width: 2;
   stroke-dasharray: 5 4;
 }

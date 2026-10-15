@@ -14,7 +14,6 @@ import { FilterPanel } from './components/FilterPanel';
 import { InvoiceDetailModal } from './components/InvoiceDetailModal';
 import { InvoiceTable } from './components/InvoiceTable';
 import { StatusCards } from './components/StatusCards';
-import pal from './palette.module.css';
 import s from './InvoicePoolPage.module.css';
 
 const PAGE_SIZE = 25;
@@ -116,7 +115,7 @@ export default function InvoicePoolPage() {
   const statusLabel = f.status === 'all' ? '' : (cards.find((c) => c.key === f.status)?.label ?? '');
 
   return (
-    <div className={pal.palette}>
+    <div>
       <PageHeader
         crumb={`${t('票池')} / ${t('企业票池')}`}
         title={t('企业票池')}

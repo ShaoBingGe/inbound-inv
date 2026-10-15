@@ -74,4 +74,63 @@
   --z-modal: 60;
   --z-pop: 80;
   --z-toast: 90;
+
+  /* 扩展状态色与图形色（收拢自各业务模块的局部变量，与设计稿一致） */
+  --blue-light: #a9c1f5; /* 阶段/状态浅蓝 */
+  --blue-mid: #6f95ec; /* 阶段/状态中蓝 */
+  --blue-bright: #9cbbfa; /* 深色背景上的亮蓝 */
+  --blue-border: #c9d7fa; /* 浅蓝描边 */
+  --navy: #17306e; /* 深蓝（已付款 / 已申报） */
+  --navy-deep: #0f2a6b; /* 热力图深格文字 */
+  --navy-bg: #e3e8f5; /* navy 标签底色 */
+  --amber: #e08a2e; /* 金额 / 当前节点 / 代扣 */
+  --orange-soft: #f2b36d; /* 浅橙（复核 / 应付阶段） */
+  --orange-deep: #c46a16; /* 深橙（时长 / 异常） */
+  --orange-wash: #fff7ec; /* 浅橙底（本地数据 / 警示） */
+  --orange-border: #f5d4a6; /* 浅橙描边 */
+  --green-border: #b7dec7; /* 浅绿描边 */
+  --red-border: #f3c3bf; /* 浅红描边（冲红 / 阻断） */
+  --red-wash: #fff8f7; /* 浅红底 */
+  --purple-wash: #f6f3fd; /* 智能翻译紫底 */
+  --purple-line: #e4dcf7; /* 翻译分隔线 */
+  --purple-border: #b9a7ee; /* 翻译描边 */
+  --axis: #c9cdd4; /* 图表坐标轴 / 无数据灰 */
+  --disabled-ink: #9aa0a8; /* 待办 / 上年 / 不可用灰字 */
+  --gray-border: #e5e6e8; /* 不可用描边 */
+  --row-alt-bg: #fbfbfc; /* 表格分组行底 */
+  --wash: #fafbfc; /* 页脚 / 区域浅底 */
+  --dark-ink: #e6e8eb; /* 深色背景上的浅字 */
+  --image-backdrop: #e5e6eb; /* 影像查看区背景灰 */
+
+  /* 发票纸张（票面原件配色，模拟打印件，不随界面主题变化） */
+  --paper-bg: #ffffff;
+  --paper-ink: #222222;
+  --paper-ink-2: #444444;
+  --paper-muted: #666666;
+  --paper-rule: #333333;
+  --paper-line: #bbbbbb;
+  --paper-dot: #cccccc;
+  --paper-head-bg: #f1f1f1;
+  --paper-thumb: #999999;
+  --paper-shadow: 0 3px 10px rgba(31, 35, 41, 0.16);
+  --paper-note-ink: #9a4a00; /* 票面手写备注 */
+  --paper-note-line: #c77d3a;
+
+  /* 影像查看器深色主题（独立窗口） */
+  --viewer-bg: #2a2d33;
+  --viewer-bar: #1f2228;
+  --viewer-rail: #24272d;
+  --viewer-line: #3a3e46;
+  --viewer-ctrl: #353941;
+  --viewer-ctrl-hover: #3d424b;
+  --viewer-ctrl-line: #4a4f58;
+  --viewer-muted: #a9aeb6;
+  --viewer-thumb-bar: #888888;
+
+  /* 移动端 / 手机外观 */
+  --phone-glass: #2a2f36;
+  --phone-thumb: #3a3f47;
+  --phone-dim: rgba(255, 255, 255, 0.6);
+  --camera-bg: #141518;
+  --mobile-sheet: #f7f6f2;
 }

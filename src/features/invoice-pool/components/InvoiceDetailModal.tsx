@@ -10,7 +10,6 @@ import type { InvoiceDetail } from '../types';
 import { DataPanel } from './DataPanel';
 import { ImageViewer } from './ImageViewer';
 import { StatusChip } from './StatusChip';
-import pal from '../palette.module.css';
 import d from './detail.module.css';
 
 const ARROW_DOWN = 'M12 5v14M6 13l6 6 6-6';
@@ -36,7 +35,7 @@ export function InvoiceDetailModal({
   const noNext = idx < 0 || idx >= ids.length - 1;
 
   const title = data ? (
-    <div className={pal.palette}>
+    <div>
       <div className="kick">
         {t('发票全生命周期')} · {t(data.country.name)} · {t(data.country.regime)}
       </div>
@@ -54,7 +53,7 @@ export function InvoiceDetailModal({
   );
 
   const headerExtra = data ? (
-    <div className={cx(pal.palette, d.headExtra)}>
+    <div className={d.headExtra}>
       <div className={d.headChips}>
         <StatusChip row={data.row} />
         <Chip tone="blue">{t('渠道：' + data.row.channel)}</Chip>
@@ -80,7 +79,7 @@ export function InvoiceDetailModal({
 
   return (
     <Modal open onClose={onClose} size="full" title={title} headerExtra={headerExtra} bodyStyle={{ background: 'var(--bg)', padding: 0 }}>
-      <div className={cx(pal.palette, d.body)}>
+      <div className={d.body}>
         {error ? <ErrorState error={error} onRetry={reload} /> : !data ? <PageLoading /> : <DetailBody data={data} />}
       </div>
     </Modal>

@@ -15,7 +15,7 @@ const sortValue = (r: CountryTaxRow, k: CountrySort) =>
   k === 'net' ? r.net : k === 'risk' ? r.riskCount : r.pendingAmount;
 
 function filingColor(p: number): string {
-  return p >= 90 ? 'var(--green-ink)' : p >= 50 ? 'var(--accent)' : 'var(--tb-withheld)';
+  return p >= 90 ? 'var(--green-ink)' : p >= 50 ? 'var(--accent)' : 'var(--amber)';
 }
 
 export function CountryTable({

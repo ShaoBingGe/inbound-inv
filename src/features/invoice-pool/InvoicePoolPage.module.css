@@ -44,11 +44,11 @@
   padding: 10px 14px;
   border-radius: var(--radius);
   background: var(--accent-wash);
-  border: 1px solid var(--pool-org-border);
+  border: 1px solid var(--blue-border);
 }
 .orgBarAlt {
-  background: var(--pool-org-alt-bg);
-  border-color: var(--pool-org-alt-border);
+  background: var(--orange-wash);
+  border-color: var(--orange-border);
 }
 .orgNote {
   color: var(--muted);

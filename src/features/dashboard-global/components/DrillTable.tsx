@@ -48,7 +48,7 @@ export function DrillTable({
       const accD = st.acc - st.accLy;
       const durD = (st.dur / st.durLy - 1) * 100;
       const hasKids = nd.kids.length > 0;
-      const bg = sel === nd.path ? 'var(--accent-wash)' : nd.depth === 0 ? 'var(--gd-row-top)' : 'var(--surface)';
+      const bg = sel === nd.path ? 'var(--accent-wash)' : nd.depth === 0 ? 'var(--row-alt-bg)' : 'var(--surface)';
       rows.push(
         <tr key={nd.path} style={{ background: bg }}>
           <td>

@@ -105,7 +105,7 @@
   --step-ink: var(--ink);
 }
 .step_now {
-  --step-dot: var(--pool-now);
+  --step-dot: var(--amber);
   --step-ink: var(--orange-ink);
 }
 .stepLine {
@@ -191,9 +191,9 @@
   flex: 1;
   min-width: 0;
   padding: 10px 12px;
-  border: 1px solid var(--pool-rev-border);
+  border: 1px solid var(--red-border);
   border-radius: var(--radius);
-  background: var(--pool-rev-bg);
+  background: var(--red-wash);
 }
 .revKind {
   font-weight: 600;
@@ -306,7 +306,7 @@
 .canvas {
   height: 640px;
   overflow: auto;
-  background: var(--pool-viewer-bg);
+  background: var(--image-backdrop);
   border-radius: var(--radius);
 }
 .box {
@@ -324,10 +324,10 @@
   width: 560px;
   min-height: 792px;
   background: var(--surface);
-  box-shadow: var(--pool-paper-shadow);
+  box-shadow: var(--paper-shadow);
   padding: 34px 38px;
   font-family: 'Noto Sans SC', 'IBM Plex Sans', sans-serif;
-  color: var(--pool-paper-ink);
+  color: var(--paper-ink);
   text-align: left;
 }
 .paperHead {
@@ -335,7 +335,7 @@
   justify-content: space-between;
   gap: 12px;
   align-items: flex-start;
-  border-bottom: 2px solid var(--pool-paper-rule);
+  border-bottom: 2px solid var(--paper-rule);
   padding-bottom: 10px;
 }
 .paperTitle {
@@ -345,7 +345,7 @@
 }
 .paperPage {
   font-size: 10.5px;
-  color: var(--pool-paper-muted);
+  color: var(--paper-muted);
   margin-top: 2px;
 }
 .paperMeta {
@@ -362,7 +362,7 @@
   line-height: 1.6;
 }
 .party {
-  border: 1px solid var(--pool-paper-line);
+  border: 1px solid var(--paper-line);
   padding: 8px 10px;
 }
 .partyL {
@@ -378,11 +378,11 @@
 .paperTable th,
 .paperTable td {
   padding: 5px 6px;
-  border: 1px solid var(--pool-paper-line);
+  border: 1px solid var(--paper-line);
   text-align: left;
 }
 .paperTable th {
-  background: var(--pool-paper-head);
+  background: var(--paper-head-bg);
   font-weight: 600;
 }
 .paperTable .r {
@@ -406,7 +406,7 @@
   justify-content: space-between;
 }
 .sumTotal {
-  border-top: 1px solid var(--pool-paper-rule);
+  border-top: 1px solid var(--paper-rule);
   font-weight: 600;
   font-size: 12px;
 }
@@ -416,7 +416,7 @@
   gap: 12px;
   margin-top: 22px;
   font-size: 10px;
-  color: var(--pool-paper-sub);
+  color: var(--paper-ink-2);
   line-height: 1.7;
 }
 .qr {
@@ -427,10 +427,10 @@
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 1px;
   padding: 3px;
-  border: 1px solid var(--pool-paper-line);
+  border: 1px solid var(--paper-line);
 }
 .qrOn {
-  background: var(--pool-paper-ink);
+  background: var(--paper-ink);
 }
 .qrOff {
   background: var(--surface);
@@ -446,7 +446,7 @@
   margin-bottom: 6px;
 }
 .textLine {
-  border-bottom: 1px dotted var(--pool-paper-dot);
+  border-bottom: 1px dotted var(--paper-dot);
   padding: 3px 0;
 }
 
@@ -472,12 +472,12 @@
 }
 .tBar {
   height: 4px;
-  background: var(--pool-paper-bar);
+  background: var(--paper-thumb);
   width: 70%;
 }
 .tLine {
   height: 2px;
-  background: var(--pool-paper-dot);
+  background: var(--paper-dot);
 }
 .tShort {
   width: 60%;
@@ -517,7 +517,7 @@
 }
 .trOn.trOn {
   background: var(--purple-bg);
-  border-color: var(--pool-tr-border);
+  border-color: var(--purple-border);
   color: var(--purple-ink);
 }
 .trSelect {
@@ -526,10 +526,10 @@
 .trNote {
   flex: none;
   padding: 7px 12px;
-  background: var(--pool-tr-bg);
+  background: var(--purple-wash);
   color: var(--purple-ink);
   font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--pool-tr-line);
+  border-bottom: 1px solid var(--purple-line);
 }
 .dataBody {
   height: 620px;

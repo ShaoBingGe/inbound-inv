@@ -64,13 +64,13 @@ export function statusCards(base: InvoiceRow[]): StatusCardDef[] {
     {
       key: 'review',
       label: '审核中',
-      dot: 'var(--pool-review)',
+      dot: 'var(--orange-soft)',
       rows: rv,
       sub: 'AP 单 ' + rv.filter((r) => r.review === 'AP单').length + ' · 费控单 ' + rv.filter((r) => r.review === '费控单').length,
     },
     { key: 'posted', label: '已入账', dot: 'var(--accent)', rows: base.filter((r) => r.status === 'posted'), sub: '凭证已生成，待付款' },
-    { key: 'paid', label: '已付款', dot: 'var(--pool-navy-ink)', rows: base.filter((r) => r.status === 'paid'), sub: '银行回单已核销' },
-    { key: 'due', label: '30 天内到期待付', dot: 'var(--pool-now)', rows: base.filter((r) => r.flagKey === 'due'), sub: '已入账 · 按付款条件计算' },
+    { key: 'paid', label: '已付款', dot: 'var(--navy)', rows: base.filter((r) => r.status === 'paid'), sub: '银行回单已核销' },
+    { key: 'due', label: '30 天内到期待付', dot: 'var(--amber)', rows: base.filter((r) => r.flagKey === 'due'), sub: '已入账 · 按付款条件计算' },
     { key: 'flag', label: '需关注', dot: 'var(--alert)', rows: base.filter((r) => r.flag && r.flagKey !== 'due'), sub: '差异、超标、红冲、更正' },
   ];
 }

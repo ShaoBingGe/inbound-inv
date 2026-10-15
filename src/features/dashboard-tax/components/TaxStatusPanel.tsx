@@ -6,12 +6,12 @@ import styles from '../TaxDashboardPage.module.css';
 
 /** 阶段色（按顺序：待采集 → 逆向冲减） */
 export const STATE_COLOR: Record<TaxStateId, string> = {
-  capture: 'var(--tb-state-1)',
-  pending: 'var(--tb-state-2)',
-  creditable: 'var(--tb-state-3)',
-  filed: 'var(--tb-state-4)',
-  nonCreditable: 'var(--tb-state-5)',
-  reversed: 'var(--tb-state-6)',
+  capture: 'var(--blue-light)',
+  pending: 'var(--blue-mid)',
+  creditable: 'var(--accent)',
+  filed: 'var(--navy)',
+  nonCreditable: 'var(--axis)',
+  reversed: 'var(--red-ink)',
 };
 
 export function TaxStatusPanel({

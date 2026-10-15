@@ -1,16 +1,5 @@
-/* 原件纸面：模拟扫描影像的纸张颜色（局部令牌，只用于票面影像） */
+/* 原件纸面：纸张配色令牌见 src/styles/tokens.css（--paper-*） */
 .paper {
-  --paper-bg: #ffffff;
-  --paper-ink: #222222;
-  --paper-ink-2: #444444;
-  --paper-muted: #666666;
-  --paper-rule: #333333;
-  --paper-line: #bbbbbb;
-  --paper-dot: #cccccc;
-  --paper-head-bg: #f1f1f1;
-  --paper-note-ink: #9a4a00;
-  --paper-note-line: #c77d3a;
-
   width: 560px;
   height: 792px;
   background: var(--paper-bg);

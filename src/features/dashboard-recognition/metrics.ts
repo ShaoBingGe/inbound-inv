@@ -16,9 +16,9 @@ export const MAX_SELECTED = 5;
 
 /** 折线颜色 + 虚线样式（按选中顺序分配；颜色变量定义在页面 CSS 模块） */
 export const LINE_STYLES: Array<{ color: string; dash: string }> = [
-  { color: 'var(--rb-line-1)', dash: '' },
-  { color: 'var(--rb-line-2)', dash: '' },
-  { color: 'var(--rb-line-3)', dash: '6 4' },
-  { color: 'var(--rb-line-4)', dash: '6 4' },
-  { color: 'var(--rb-line-5)', dash: '2 3' },
+  { color: 'var(--blue-ink)', dash: '' },
+  { color: 'var(--amber)', dash: '' },
+  { color: 'var(--blue-mid)', dash: '6 4' },
+  { color: 'var(--orange-ink)', dash: '6 4' },
+  { color: 'var(--ink)', dash: '2 3' },
 ];

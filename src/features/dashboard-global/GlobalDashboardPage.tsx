@@ -292,7 +292,7 @@ export default function GlobalDashboardPage() {
   return (
     <>
       {header}
-      <PageBody className={s.palette}>
+      <PageBody>
         <div
           className={cx(s.banner, isGlobal ? s.bannerGlobal : s.bannerLocal)}
         >

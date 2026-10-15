@@ -59,7 +59,7 @@ export function HeatTable({ board, metric }: { board: RecognitionBoard; metric: 
                         className={`num ${s.end}`}
                         style={{
                           background: bad ? 'var(--red-bg)' : `color-mix(in srgb, var(--accent) ${pct}%, transparent)`,
-                          color: bad ? 'var(--red-ink)' : p > 0.7 ? 'var(--rb-heat-deep-ink)' : 'var(--ink)',
+                          color: bad ? 'var(--red-ink)' : p > 0.7 ? 'var(--navy-deep)' : 'var(--ink)',
                         }}
                       >
                         {fmtValue(v, m, t)}

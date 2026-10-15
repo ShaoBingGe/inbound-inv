@@ -44,7 +44,7 @@ function DistributionChart({ dist }: { dist: Distribution }) {
                 title={tip}
                 style={{
                   height: `${((v / mx) * 150).toFixed(1)}px`,
-                  background: dev > 0.3 && v > 0.01 ? 'var(--dr-warn)' : 'var(--dr-bar)',
+                  background: dev > 0.3 && v > 0.01 ? 'var(--chart-3)' : 'var(--blue-mid)',
                 }}
               />
             );
@@ -130,11 +130,11 @@ export function DistributionPanel({
       <DistributionChart dist={dist} />
       <div className={s.legend}>
         <span className={s.legendItem}>
-          <span className={cx(s.swatch, s.swatch10)} style={{ background: 'var(--dr-bar)' }} aria-hidden="true" />
+          <span className={cx(s.swatch, s.swatch10)} style={{ background: 'var(--blue-mid)' }} aria-hidden="true" />
           {t('当前样本')}
         </span>
         <span className={s.legendItem}>
-          <span className={cx(s.swatch, s.swatch10)} style={{ background: 'var(--dr-warn)' }} aria-hidden="true" />
+          <span className={cx(s.swatch, s.swatch10)} style={{ background: 'var(--chart-3)' }} aria-hidden="true" />
           {t('偏离目标 > 30%')}
         </span>
         <span className={s.legendItem}>
@@ -159,7 +159,7 @@ export function DistributionPanel({
           <div className={s.covTrack}>
             <div
               className={s.covFill}
-              style={{ width: `${v.cur}%`, background: Math.abs(v.cur - v.tgt) > 4 ? 'var(--dr-warn)' : 'var(--accent)' }}
+              style={{ width: `${v.cur}%`, background: Math.abs(v.cur - v.tgt) > 4 ? 'var(--chart-3)' : 'var(--accent)' }}
             />
             <span className={s.covMark} style={{ insetInlineStart: `${v.tgt}%` }} aria-hidden="true" />
           </div>

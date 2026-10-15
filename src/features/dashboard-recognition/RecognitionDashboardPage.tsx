@@ -53,7 +53,7 @@ export default function RecognitionDashboardPage() {
   }
 
   return (
-    <div className={s.page}>
+    <div>
       {header}
       <PageBody className={s.body}>
         <Card padded={false} aria-label={t('筛选')} className={s.block}>
@@ -91,7 +91,7 @@ export default function RecognitionDashboardPage() {
                 >
                   <span
                     className={s.pillDot}
-                    style={{ background: on ? LINE_STYLES[i].color : 'var(--rb-off)' }}
+                    style={{ background: on ? LINE_STYLES[i].color : 'var(--axis)' }}
                     aria-hidden="true"
                   />
                   {t(c.name)}

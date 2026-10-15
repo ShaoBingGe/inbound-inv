@@ -1,14 +1,4 @@
-/* 识别效果看板。图表专用色在此定义为局部变量（设计稿原色），其余用全局令牌。 */
-.page {
-  --rb-line-1: var(--blue-ink);
-  --rb-line-2: #e08a2e;
-  --rb-line-3: #6f95ec;
-  --rb-line-4: var(--orange-ink);
-  --rb-line-5: var(--ink);
-  --rb-off: #c9cdd4;
-  --rb-axis: #c9cdd4;
-  --rb-heat-deep-ink: #0f2a6b;
-}
+/* 识别效果看板（配色全部来自 src/styles/tokens.css） */
 
 .body {
   max-width: 1320px;
@@ -124,7 +114,7 @@
   stroke: var(--line-soft);
 }
 .axisLine {
-  stroke: var(--rb-axis);
+  stroke: var(--axis);
 }
 .xLabels {
   display: grid;

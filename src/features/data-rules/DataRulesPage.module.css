@@ -1,10 +1,5 @@
-/* 数据识别规则管理。本页图表专用色（tokens.css 中暂无对应令牌，建议提升为全局令牌） */
+/* 数据识别规则管理（配色令牌见 src/styles/tokens.css） */
 .root {
-  --dr-bar: #6f95ec;
-  --dr-synth: #a9c1f5;
-  --dr-warn: var(--chart-3);
-  --dr-log-bg: var(--ink);
-  --dr-log-ink: #e6e8eb;
   display: contents;
 }
 
@@ -133,8 +128,8 @@
 }
 .log {
   margin-top: 10px;
-  background: var(--dr-log-bg);
-  color: var(--dr-log-ink);
+  background: var(--ink);
+  color: var(--dark-ink);
   border-radius: var(--radius);
   padding: 10px 14px;
   font-size: var(--fs-sm);
