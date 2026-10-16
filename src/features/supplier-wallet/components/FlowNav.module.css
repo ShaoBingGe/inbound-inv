@@ -1,0 +1,174 @@
+/* 供应商票夹流程导航：票夹 → 三单匹配 → 应付单 ┊ 药品匹配关系 */
+.flow {
+  min-width: 0;
+}
+.steps {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 22px minmax(0, 1.35fr) 22px minmax(0, 0.85fr)
+    17px minmax(0, 1fr);
+  align-items: stretch;
+}
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.step:hover {
+  border-color: var(--blue-border);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.step:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.on {
+  border-color: var(--accent);
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+/* 三单匹配：主入口，常驻强调 */
+.primary {
+  background: linear-gradient(135deg, var(--accent-wash), var(--surface) 70%);
+  border-color: var(--blue-border);
+}
+.primary.on {
+  border-color: var(--accent);
+}
+
+/* 知识库：辅助入口 */
+.kb {
+  background: var(--wash);
+  border-style: dashed;
+}
+.kb.on {
+  border-style: solid;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+.no {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gray-bg);
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+.on .no,
+.primary .no {
+  background: var(--accent);
+  color: #fff;
+}
+.title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge {
+  margin-inline-start: auto;
+  font-weight: 600;
+}
+.head > :last-child:not(.title):not(.no) {
+  margin-inline-start: auto;
+}
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.metric {
+  font-size: var(--fs-base);
+  color: var(--ink);
+}
+.metric b {
+  font-size: var(--fs-lg);
+}
+.metric small {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.warn {
+  color: var(--orange-ink);
+}
+.ok {
+  color: var(--green-ink);
+}
+.sub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--axis);
+}
+.sep {
+  justify-self: center;
+  width: 1px;
+  margin-block: 8px;
+  background: var(--line);
+}
+
+/* 窄屏：两列，隐藏箭头 */
+@media (max-width: 960px) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .arrow,
+  .sep {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

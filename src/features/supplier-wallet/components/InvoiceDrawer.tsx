@@ -121,6 +121,7 @@ function DetailBody({
         {tab === 'match' ? (
           <MatchPanel
             inv={inv}
+            supplierName={supplier.name}
             m={m}
             busy={busy}
             t={t}
@@ -244,6 +245,7 @@ function FacePanel({ inv, supplier, t }: { inv: WalletInvoice; supplier: WalletS
 
 function MatchPanel({
   inv,
+  supplierName,
   m,
   busy,
   t,
@@ -251,6 +253,7 @@ function MatchPanel({
   onAccept,
 }: {
   inv: WalletInvoice;
+  supplierName: string;
   m: MatchState;
   busy: boolean;
   t: T;
@@ -265,6 +268,12 @@ function MatchPanel({
         <span className={styles.matchMeta}>
           PO <span className="mono">{inv.po}</span> {t('· 收货')} <span className="mono">{t(inv.grn)}</span>{' '}
           {t('· 容差：数量 ±2%，单价 ±1%，总额 ±500 CNY 等值')}
+          {inv.mg ? (
+            <>
+              {' '}
+              {t('· 匹配组')} <span className="mono">{inv.mg}</span>
+            </>
+          ) : null}
         </span>
       </div>
       <div className={styles.boxed}>
@@ -309,14 +318,21 @@ function MatchPanel({
         </Table>
       </div>
       <div className={styles.actions}>
-        <Button variant="primary" onClick={onRematch} disabled={busy}>
+        {inv.mg ? (
+          <ButtonLink variant="primary" to={ROUTES.matchWorkbench(inv.mg)}>
+            {t('打开手工匹配工作台')}
+          </ButtonLink>
+        ) : null}
+        <Button variant={inv.mg ? 'default' : 'primary'} onClick={onRematch} disabled={busy}>
           {t('重新匹配')}
         </Button>
         <Button onClick={onAccept} disabled={busy}>
           {t('在容差内接受')}
         </Button>
         <ButtonLink to={PROTOTYPE_ROUTE['Portal.dc.html']}>{t('向供应商发起差异处理')}</ButtonLink>
-        <ButtonLink to={ROUTES.supplierWalletView('match')}>{t('在三单匹配中按匹配组处理')}</ButtonLink>
+        <ButtonLink to={ROUTES.supplierWalletView('match', inv.mg ? supplierName : undefined)}>
+          {t('在三单匹配中按匹配组处理')}
+        </ButtonLink>
       </div>
     </>
   );

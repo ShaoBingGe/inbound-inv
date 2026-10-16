@@ -32,6 +32,7 @@ export function SupplierList({
         }).length;
         const joined = s.invs.map((i) => i.amt).join(' + ');
         const amt = joined.length > 28 ? t(s.invs[0].amt + ' 等') : joined;
+        const groups = s.invs.filter((i) => i.mg).length;
         const on = s.code === selected;
         return (
           <button
@@ -54,6 +55,11 @@ export function SupplierList({
                 {t('误差')} {((errs / tot) * 100).toFixed(1)}%
               </span>
               {exc > 0 ? <Chip tone="orange">{t(exc + ' 张待处理')}</Chip> : null}
+              {groups > 0 ? (
+                <Chip tone="purple">
+                  {t('匹配组')} {groups}
+                </Chip>
+              ) : null}
             </div>
           </button>
         );

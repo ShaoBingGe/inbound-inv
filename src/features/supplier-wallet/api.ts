@@ -1,18 +1,29 @@
 import { http, isMock, mockDelay } from '@/lib/http';
 import { buildCountries, ROUTE_RULES, SUPPLIERS } from './data';
+import { mockMatchWalletSuppliers } from './match/api';
 import type { ApState, CountryCode, CountrySuppliers, ExpState, MatchState, WalletOverview } from './types';
 
 const inv = (no: string) => `/v1/supplier-wallet/invoices/${encodeURIComponent(no)}`;
 
 /** 国家页签（含各国指标与票数）与路由规则。后端按用户的国家授权过滤。 */
 export async function fetchWalletOverview(): Promise<WalletOverview> {
-  if (isMock()) return mockDelay({ countries: buildCountries(), routes: ROUTE_RULES });
+  if (isMock()) {
+    const extra = mockMatchWalletSuppliers().reduce((a, x) => a + x.invs.length, 0);
+    const countries = buildCountries().map((c) =>
+      c.code === 'CN' ? { ...c, invoiceCount: c.invoiceCount + extra } : c,
+    );
+    return mockDelay({ countries, routes: ROUTE_RULES });
+  }
   return http.get<WalletOverview>('/v1/supplier-wallet/overview');
 }
 
 /** 某国票夹内的供应商与发票（数据驻留在该国数据中心） */
 export async function fetchWalletSuppliers(country: CountryCode): Promise<CountrySuppliers> {
-  if (isMock()) return mockDelay({ country, suppliers: SUPPLIERS[country] });
+  if (isMock()) {
+    // 中国大陆的票夹包含三单匹配示例里的医药供应商，发票带所属匹配组
+    const suppliers = country === 'CN' ? [...mockMatchWalletSuppliers(), ...SUPPLIERS.CN] : SUPPLIERS[country];
+    return mockDelay({ country, suppliers });
+  }
   return http.get<CountrySuppliers>(`/v1/supplier-wallet/countries/${country}/suppliers`);
 }
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Chip, ErrorState, Icon, Progress, Select, Spinner, useToast } from '@/components/ui';
 import { ROUTES } from '@/app/routes';
@@ -58,7 +58,19 @@ function useMatchRun(country: CountryCode) {
 }
 
 /** 三单匹配 · 发票匹配生成应付单：过滤上下文 → 概览 → 执行状态 → 匹配中 / 未完全 / 已完全 / 已确认 */
-export function MatchBoard({ country, onPickCountry }: { country: CountryCode; onPickCountry?: () => void }) {
+export function MatchBoard({
+  country,
+  initialSupplier = '',
+  onPickCountry,
+  onChange,
+}: {
+  country: CountryCode;
+  /** 从票夹进入时按供应商过滤 */
+  initialSupplier?: string;
+  onPickCountry?: () => void;
+  /** 确认、新增、调整策略后通知外层刷新概况 */
+  onChange?: () => void;
+}) {
   const t = useT();
   const toast = useToast();
   const navigate = useNavigate();
@@ -66,7 +78,7 @@ export function MatchBoard({ country, onPickCountry }: { country: CountryCode; o
   const [filter, setFilter] = useState<MatchBoardFilter>({
     range: DEFAULT_RANGE,
     buyer: 'all',
-    supplier: 'all',
+    supplier: initialSupplier || 'all',
   });
   const board = useAsync(
     () => fetchMatchBoard(country, filter),
@@ -78,7 +90,12 @@ export function MatchBoard({ country, onPickCountry }: { country: CountryCode; o
   const [pending, setPending] = useState<'inv' | 'inb' | null>(null);
   const [busy, setBusy] = useState(false);
 
-  useEffect(() => setFilter({ range: DEFAULT_RANGE, buyer: 'all', supplier: 'all' }), [country]);
+  const firstCountry = useRef(country);
+  useEffect(() => {
+    if (country === firstCountry.current) return;
+    firstCountry.current = country;
+    setFilter({ range: DEFAULT_RANGE, buyer: 'all', supplier: 'all' });
+  }, [country]);
 
   const data = board.data?.country === country ? board.data : undefined;
   const tol = data?.tolerance;
@@ -104,6 +121,7 @@ export function MatchBoard({ country, onPickCountry }: { country: CountryCode; o
           : t('已确认匹配结果，生成应付单 ' + (aps[0] ?? '')),
       );
       board.reload();
+      onChange?.();
     } catch (e) {
       toast(e instanceof Error ? e.message : String(e), { error: true });
     } finally {
@@ -117,6 +135,7 @@ export function MatchBoard({ country, onPickCountry }: { country: CountryCode; o
       setStrategyMg(null);
       toast(t('已保存匹配策略，正在以新口径重新执行 ' + mg));
       board.reload();
+      onChange?.();
     } catch (e) {
       toast(e instanceof Error ? e.message : String(e), { error: true });
     }
@@ -129,6 +148,7 @@ export function MatchBoard({ country, onPickCountry }: { country: CountryCode; o
       setPending(null);
       toast(t('已创建匹配组 ' + d.id + '，已进入匹配中队列'));
       board.reload();
+      onChange?.();
     } catch (e) {
       toast(e instanceof Error ? e.message : String(e), { error: true });
     }

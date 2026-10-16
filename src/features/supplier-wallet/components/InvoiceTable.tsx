@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button, Card, Chip, LinkButton, Table } from '@/components/ui';
-import { PROTOTYPE_ROUTE } from '@/app/routes';
+import { PROTOTYPE_ROUTE, ROUTES } from '@/app/routes';
 import { useT } from '@/i18n';
 import { cx } from '@/lib/sample';
 import { AP_LABEL, EXP_LABEL, MATCH_LABEL } from '../data';
@@ -13,13 +13,17 @@ export function InvoiceTable({
   selectedInv,
   over,
   onOpen,
+  onMatch,
 }: {
   supplier: WalletSupplier;
   selectedInv: string | null;
   over: Record<string, InvoiceOverride>;
   onOpen: (inv: WalletInvoice) => void;
+  /** 进入三单匹配（按该供应商过滤） */
+  onMatch: () => void;
 }) {
   const t = useT();
+  const poCount = supplier.invs.filter((i) => i.route === 'PO').length;
   return (
     <Card padded={false} className={styles.invCard} aria-label={t('供应商发票')}>
       <div className={styles.invHead}>
@@ -27,9 +31,15 @@ export function InvoiceTable({
         <span className={styles.invMeta}>
           {t(supplier.code + ' · ' + supplier.ind + ' · ' + supplier.invs.length + ' 张发票')}
         </span>
-        <Link className={styles.invHeadLink} to={PROTOTYPE_ROUTE['Portal.dc.html']}>
-          {t('在供应商门户查看')}
-        </Link>
+        <span className={styles.invHeadLink}>
+          <Link to={PROTOTYPE_ROUTE['Portal.dc.html']}>{t('在供应商门户查看')}</Link>
+          {poCount ? (
+            <Button size="sm" variant="primary" onClick={onMatch}>
+              {t('去三单匹配')}
+              <span className="num">· {poCount}</span>
+            </Button>
+          ) : null}
+        </span>
       </div>
       <div className={styles.tableTop}>
         <Table hoverRows className={styles.invTable}>
@@ -67,6 +77,11 @@ export function InvoiceTable({
                   <td>{t(routeLabel(i.route))}</td>
                   <td>
                     <Chip tone={m.tone}>{t(m.label)}</Chip>
+                    {i.mg ? (
+                      <Link className={cx('mono', styles.mgLink)} to={ROUTES.matchWorkbench(i.mg)}>
+                        {i.mg}
+                      </Link>
+                    ) : null}
                   </td>
                   <td>
                     <Chip tone={ap.tone}>{t(ap.label)}</Chip>

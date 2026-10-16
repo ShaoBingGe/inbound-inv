@@ -3,27 +3,29 @@
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
+  align-items: flex-end;
+}
+.titleRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.titleRow > span {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+}
+.countryPick {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.countryPick select {
+  width: auto;
+  min-width: 150px;
 }
 .headStatValue {
   font-size: 16px;
   font-weight: 600;
-}
-
-/* 国家页签贴在标题栏底边（与设计稿一致：标题与页签同一白底） */
-.countryRow {
-  flex-basis: 100%;
-  min-width: 0;
-  overflow-x: auto;
-  margin-bottom: -15px;
-}
-.countryRow > [role='tablist'] {
-  flex-wrap: nowrap;
-  border-bottom-color: transparent;
-}
-.countN {
-  color: var(--muted);
-  font-weight: 400;
-  margin-inline-start: 4px;
 }
 
 /* ---------- 主体 ---------- */
@@ -31,20 +33,6 @@
   max-width: 1320px;
   padding-top: 18px;
   padding-bottom: 48px;
-}
-
-.residency {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  background: var(--accent-wash);
-  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--surface));
-  color: var(--blue-ink);
-}
-.residency svg {
-  flex: none;
 }
 
 .split {
@@ -133,6 +121,14 @@
 }
 .invHeadLink {
   margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.mgLink {
+  display: block;
+  margin-top: 3px;
+  font-size: var(--fs-xs);
 }
 .tableTop {
   border-top: 1px solid var(--line);

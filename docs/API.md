@@ -57,7 +57,7 @@
 
 | 方法 | 路径 | 后端 |
 |---|---|---|
-| GET | `/v1/supplier-wallet/countries/{country}/suppliers` | 业务 API |
+| GET | `/v1/supplier-wallet/countries/{country}/suppliers`（发票带所属匹配组 `mg`） | 业务 API |
 | POST | `/v1/supplier-wallet/invoices/{no}/accept-tolerance` | 业务 API |
 | POST | `/v1/supplier-wallet/invoices/{no}/ap-voucher` | 业务 API |
 | POST | `/v1/supplier-wallet/invoices/{no}/expense` | 业务 API |
@@ -70,6 +70,7 @@
 
 | 方法 | 路径 | 说明 |
 |---|---|---|
+| GET | `/v1/supplier-wallet/countries/{country}/match/summary` | 三单匹配概况（票夹顶部流程导航：各分区组数、未匹配量、应付单数、知识库规模） |
 | GET | `/v1/supplier-wallet/countries/{country}/match/board?range&buyer&supplier` | 概览指标、匹配组、匹配中（手工新增）、容差规则 |
 | GET | `/v1/supplier-wallet/countries/{country}/match/run` | 匹配引擎批处理状态（前端轮询；可改 SSE） |
 | POST | `/v1/supplier-wallet/countries/{country}/match/run` | 重新同步税务发票并重跑匹配 |

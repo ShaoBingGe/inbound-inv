@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Chip, Empty, ErrorState, Icon, PageBody, PageHeader, PageLoading, Section, Spinner, Tabs } from '@/components/ui';
+import { Chip, Empty, ErrorState, PageBody, PageHeader, PageLoading, Section, Select, Spinner } from '@/components/ui';
 import { useAuth } from '@/auth/AuthProvider';
 import { canSeeCountry } from '@/auth/types';
 import { useT } from '@/i18n';
 import { useAsync } from '@/lib/useAsync';
 import { fetchWalletOverview, fetchWalletSuppliers } from './api';
+import { fetchMatchSummary } from './match/api';
+import { FlowNav, type WalletView, type WalletStats } from './components/FlowNav';
 import { InvoiceDrawer } from './components/InvoiceDrawer';
 import { InvoiceTable } from './components/InvoiceTable';
 import { DrugMappingView } from './components/drugs/DrugMappingView';
@@ -15,15 +17,8 @@ import { SupplierList } from './components/SupplierList';
 import type { CountryCode, CountrySuppliers, DetailTab, InvoiceOverride, WalletInvoice } from './types';
 import styles from './SupplierWalletPage.module.css';
 
-/** 票夹内的视图：票夹（按供应商）/ 三单匹配 / 应付单 / 药品匹配关系 */
-type WalletView = 'wallet' | 'match' | 'ap' | 'drugs';
-const VIEWS: Array<[WalletView, string]> = [
-  ['wallet', '票夹'],
-  ['match', '三单匹配'],
-  ['ap', '应付单'],
-  ['drugs', '药品匹配关系'],
-];
-const asView = (v: string | null): WalletView => VIEWS.find(([k]) => k === v)?.[0] ?? 'wallet';
+const VIEWS: WalletView[] = ['wallet', 'match', 'ap', 'drugs'];
+const asView = (v: string | null): WalletView => VIEWS.find((k) => k === v) ?? 'wallet';
 
 export default function SupplierWalletPage() {
   const t = useT();
@@ -31,10 +26,12 @@ export default function SupplierWalletPage() {
   const overview = useAsync(fetchWalletOverview, []);
   const [params, setParams] = useSearchParams();
   const view = asView(params.get('view'));
-  const setView = (v: WalletView) => setParams(v === 'wallet' ? {} : { view: v });
+  const query = params.get('q') ?? '';
+  const setView = (v: WalletView, q?: string) => setParams(v === 'wallet' ? {} : q ? { view: v, q } : { view: v });
 
-  const [ctyPick, setCtyPick] = useState<CountryCode>(view === 'wallet' ? 'JP' : 'CN');
-  const [supCode, setSupCode] = useState<string | null>('SUP-0013397');
+  // 默认中国大陆（主数据中心），三单匹配示例数据位于此
+  const [ctyPick, setCtyPick] = useState<CountryCode>('CN');
+  const [supCode, setSupCode] = useState<string | null>(null);
   const [invNo, setInvNo] = useState<string | null>(null);
   const [tab, setTab] = useState<DetailTab>('match');
   const [over, setOver] = useState<Record<string, InvoiceOverride>>({});
@@ -47,10 +44,12 @@ export default function SupplierWalletPage() {
   const country = countries.find((c) => c.code === ctyPick) ?? countries[0];
   const cty = country?.code;
 
+  // 切换视图时重新取数：票夹里的匹配状态、流程导航的待处理量都跟随三单匹配的写操作变化
   const sups = useAsync<CountrySuppliers | null>(
-    () => (cty && view === 'wallet' ? fetchWalletSuppliers(cty) : Promise.resolve(null)),
-    [cty, view === 'wallet'],
+    () => (cty ? fetchWalletSuppliers(cty) : Promise.resolve(null)),
+    [cty, view],
   );
+  const summary = useAsync(() => (cty ? fetchMatchSummary(cty) : Promise.resolve(null)), [cty, view]);
 
   const onPatch = useCallback((no: string, patch: InvoiceOverride) => {
     setOver((o) => ({ ...o, [no]: { ...o[no], ...patch } }));
@@ -60,14 +59,42 @@ export default function SupplierWalletPage() {
   if (overview.loading && !overview.data) return <PageLoading />;
   if (overview.error) return <ErrorState error={overview.error} onRetry={overview.reload} />;
 
+  const pickCountry = (code: CountryCode) => {
+    setCtyPick(code);
+    setSupCode(null);
+    setInvNo(null);
+  };
+
   const header = (
     <PageHeader
       crumb={`${t('票池')} / ${t('供应商票夹')}`}
-      title={t('供应商票夹')}
-      badges={<Chip tone="gray">{t('示例数据')}</Chip>}
+      title={
+        <span className={styles.titleRow}>
+          {t('供应商票夹')}
+          <Chip tone="gray">{t('示例数据')}</Chip>
+        </span>
+      }
+      subtitle={
+        country
+          ? t(
+              country.name +
+                '的票夹数据存放于 ' +
+                country.dc +
+                '；只有被授权到该国家的人员可查看票面与影像，其他国家仅能在全球看板看到汇总指标。',
+            )
+          : undefined
+      }
       actions={
         country ? (
           <div className={styles.headStats}>
+            <label className={styles.countryPick}>
+              <span className="kick">{t('国家 / 数据中心')}</span>
+              <Select
+                value={country.code}
+                onChange={(v) => pickCountry(v as CountryCode)}
+                options={countries.map((c) => ({ value: c.code, label: `${t(c.name)} · ${c.invoiceCount}` }))}
+              />
+            </label>
             <div>
               <div className="kick">{t('本国票夹字段误差率')}</div>
               <div className={`num ${styles.headStatValue}`}>{country.err}</div>
@@ -83,30 +110,7 @@ export default function SupplierWalletPage() {
           </div>
         ) : null
       }
-    >
-      {countries.length ? (
-        <div className={styles.countryRow}>
-          <Tabs
-            ariaLabel={t('国家')}
-            value={country?.code ?? 'JP'}
-            onChange={(k) => {
-              setCtyPick(k);
-              setSupCode(null);
-              setInvNo(null);
-            }}
-            items={countries.map((c) => ({
-              value: c.code,
-              label: (
-                <>
-                  {t(c.name)}
-                  <span className={`num ${styles.countN}`}>{c.invoiceCount}</span>
-                </>
-              ),
-            }))}
-          />
-        </div>
-      ) : null}
-    </PageHeader>
+    />
   );
 
   if (!country) {
@@ -123,49 +127,43 @@ export default function SupplierWalletPage() {
   const ready = sups.data && sups.data.country === country.code ? sups.data.suppliers : null;
   const supplier = ready ? (ready.find((s) => s.code === supCode) ?? ready[0]) : undefined;
   const invoice = supplier?.invs.find((i) => i.no === invNo) ?? null;
+  const walletStats: WalletStats | null = ready
+    ? {
+        invoices: ready.reduce((a, s) => a + s.invs.length, 0),
+        suppliers: ready.length,
+        po: ready.reduce((a, s) => a + s.invs.filter((i) => i.route === 'PO').length, 0),
+      }
+    : null;
 
   /** 示例数据的三单匹配位于中国大陆；当前国家无数据时提供切换 */
-  const pickCn =
-    country.code !== 'CN' && countries.some((c) => c.code === 'CN')
-      ? () => {
-          setCtyPick('CN');
-          setSupCode(null);
-          setInvNo(null);
-        }
-      : undefined;
+  const pickCn = country.code !== 'CN' && countries.some((c) => c.code === 'CN') ? () => pickCountry('CN') : undefined;
 
   const openInvoice = (i: WalletInvoice) => {
     setInvNo(i.no);
     setTab(i.route === '费控' ? 'exp' : 'match');
+  };
+  /** 从票夹进入三单匹配：按供应商过滤匹配组 */
+  const goMatch = (supplierName?: string) => {
+    setInvNo(null);
+    setView('match', supplierName);
   };
 
   return (
     <>
       {header}
       <PageBody className={styles.body}>
-        <div className={styles.residency}>
-          <Icon d="M4 4h16v6H4zM4 14h16v6H4z" strokeWidth={1.6} />
-          <span>
-            {t(
-              country.name +
-                '的票夹数据存放于 ' +
-                country.dc +
-                '；只有被授权到该国家的人员可查看票面与影像，其他国家仅能在全球看板看到汇总指标。',
-            )}
-          </span>
-        </div>
+        <FlowNav view={view} onView={(v) => setView(v)} wallet={walletStats} match={summary.data ?? null} />
 
-        <Tabs
-          ariaLabel={t('票夹视图')}
-          value={view}
-          onChange={setView}
-          items={VIEWS.map(([v, label]) => ({ value: v, label: t(label) }))}
-        />
-
-        {view === 'match' ? <MatchBoard country={country.code} onPickCountry={pickCn} /> : null}
-        {view === 'ap' ? (
-          <PayablesView country={country.code} initialQuery={params.get('q') ?? ''} onPickCountry={pickCn} />
+        {view === 'match' ? (
+          <MatchBoard
+            key={query}
+            country={country.code}
+            initialSupplier={query}
+            onPickCountry={pickCn}
+            onChange={summary.reload}
+          />
         ) : null}
+        {view === 'ap' ? <PayablesView country={country.code} initialQuery={query} onPickCountry={pickCn} /> : null}
         {view === 'drugs' ? <DrugMappingView country={country.code} onPickCountry={pickCn} /> : null}
 
         {view !== 'wallet' ? null : sups.error ? (
@@ -180,13 +178,14 @@ export default function SupplierWalletPage() {
           )
         ) : (
           <div className={styles.split}>
-            <SupplierList
-              suppliers={ready}
-              selected={supplier.code}
+            <SupplierList suppliers={ready} selected={supplier.code} over={over} onPick={(code) => setSupCode(code)} />
+            <InvoiceTable
+              supplier={supplier}
+              selectedInv={invNo}
               over={over}
-              onPick={(code) => setSupCode(code)}
+              onOpen={openInvoice}
+              onMatch={() => goMatch(supplier.invs.some((i) => i.mg) ? supplier.name : undefined)}
             />
-            <InvoiceTable supplier={supplier} selectedInv={invNo} over={over} onOpen={openInvoice} />
           </div>
         )}
 

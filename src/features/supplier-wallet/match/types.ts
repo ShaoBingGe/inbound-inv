@@ -79,6 +79,22 @@ export interface MatchBoardFilter {
   supplier: string;
 }
 
+/** 三单匹配概况：供应商票夹顶部流程导航使用 */
+export interface MatchSummary {
+  /** 未完全匹配 / 已完全匹配（待确认）/ 已确认的匹配组数 */
+  manual: number;
+  auto: number;
+  done: number;
+  /** 手工新增、尚在匹配中的组 */
+  drafts: number;
+  unmatchedInvoices: number;
+  pendingInbounds: number;
+  payables: number;
+  /** 药品匹配关系知识库：物料数与匹配率（%） */
+  drugs: number;
+  drugRate: number;
+}
+
 export interface MatchBoardData {
   country: CountryCode;
   groups: MatchGroup[];

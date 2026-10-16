@@ -64,6 +64,8 @@ export interface WalletInvoice {
   grn: string;
   lines: MatchLine[];
   log: CorrectionLogEntry[];
+  /** 所属匹配组：有 PO 的发票进入三单匹配后由引擎分配 */
+  mg?: string;
 }
 
 export interface WalletSupplier {
