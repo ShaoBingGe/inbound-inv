@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
+import { ROUTES } from '@/app/routes';
 import { Chip, Empty, ErrorState, PageBody, PageHeader, PageLoading, Section, Select, Spinner } from '@/components/ui';
 import { useAuth } from '@/auth/AuthProvider';
 import { canSeeCountry } from '@/auth/types';
@@ -10,14 +11,13 @@ import { fetchMatchSummary } from './match/api';
 import { FlowNav, type WalletView, type WalletStats } from './components/FlowNav';
 import { InvoiceDrawer } from './components/InvoiceDrawer';
 import { InvoiceTable } from './components/InvoiceTable';
-import { DrugMappingView } from './components/drugs/DrugMappingView';
 import { MatchBoard } from './components/match/MatchBoard';
 import { PayablesView } from './components/ap/PayablesView';
 import { SupplierList } from './components/SupplierList';
 import type { CountryCode, CountrySuppliers, DetailTab, InvoiceOverride, WalletInvoice } from './types';
 import styles from './SupplierWalletPage.module.css';
 
-const VIEWS: WalletView[] = ['wallet', 'match', 'ap', 'drugs'];
+const VIEWS: WalletView[] = ['wallet', 'match', 'ap'];
 const asView = (v: string | null): WalletView => VIEWS.find((k) => k === v) ?? 'wallet';
 
 export default function SupplierWalletPage() {
@@ -56,6 +56,8 @@ export default function SupplierWalletPage() {
   }, []);
   const closeDetail = useCallback(() => setInvNo(null), []);
 
+  // 药品匹配关系已移到「数据管理 · 三单匹配关系」，兼容旧链接
+  if (params.get('view') === 'drugs') return <Navigate to={ROUTES.dataMatchRelations} replace />;
   if (overview.loading && !overview.data) return <PageLoading />;
   if (overview.error) return <ErrorState error={overview.error} onRetry={overview.reload} />;
 
@@ -164,7 +166,6 @@ export default function SupplierWalletPage() {
           />
         ) : null}
         {view === 'ap' ? <PayablesView country={country.code} initialQuery={query} onPickCountry={pickCn} /> : null}
-        {view === 'drugs' ? <DrugMappingView country={country.code} onPickCountry={pickCn} /> : null}
 
         {view !== 'wallet' ? null : sups.error ? (
           <ErrorState error={sups.error} onRetry={sups.reload} />

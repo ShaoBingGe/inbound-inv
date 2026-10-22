@@ -829,7 +829,7 @@ export const PAYABLES: Payable[] = [
 
 /* ---------------- 药品匹配关系（确定性生成，与设计稿一致） ---------------- */
 
-const DRUG_NAMES = [
+export const DRUG_NAMES = [
   '人促红素注射液',
   '硫酸氢氯吡格雷片',
   '注射用头孢他啶',
@@ -861,9 +861,9 @@ const DRUG_NAMES = [
   '依诺肝素钠注射液',
   '氨氯地平片',
 ];
-const DRUG_SUPS = [S.gz, S.cq, S.sc, S.hn, S.mm, '重控股湖南民生药业有限公司'];
+export const DRUG_SUPS = [S.gz, S.cq, S.sc, S.hn, S.mm, '重控股湖南民生药业有限公司'];
 const DRUG_BUYERS = ['集团中心仓', '重庆片区仓', '川渝配送中心', '湘黔配送中心', '华中区域仓'];
-const SPECS = [
+export const SPECS = [
   '0.25g',
   '0.5g',
   '1.0g',
@@ -883,10 +883,10 @@ const SPECS = [
   '250ml',
   '500ml',
 ];
-const PKG = ['×10支/盒', '×1支', '×5支/盒', '×20片/盒', '×100ml/袋', '×250ml/袋', '', '×12粒/板'];
-const UNITS = ['盒', '支', '瓶', '袋', '盒'];
-const IUNITS = ['支', '盒', '瓶', '袋'];
-const SFX = ['', '(进口)', '(原研)', '(集采)', '(基药)'];
+export const PKG = ['×10支/盒', '×1支', '×5支/盒', '×20片/盒', '×100ml/袋', '×250ml/袋', '', '×12粒/板'];
+export const UNITS = ['盒', '支', '瓶', '袋', '盒'];
+export const IUNITS = ['支', '盒', '瓶', '袋'];
+export const SFX = ['', '(进口)', '(原研)', '(集采)', '(基药)'];
 const RNUM = [10, 5, 12, 6, 100, 2, 20, 50];
 
 function h(s: string): number {

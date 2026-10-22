@@ -90,9 +90,6 @@ export interface MatchSummary {
   unmatchedInvoices: number;
   pendingInbounds: number;
   payables: number;
-  /** 药品匹配关系知识库：物料数与匹配率（%） */
-  drugs: number;
-  drugRate: number;
 }
 
 export interface MatchBoardData {

@@ -475,9 +475,7 @@ export async function fetchPayables(country: CountryCode): Promise<Payable[]> {
 
 /* ================= 与供应商票夹的关联 ================= */
 
-let drugCache: DrugMapping | null = null;
-
-/** 三单匹配概况（流程导航：票夹 → 三单匹配 → 应付单） */
+/** 三单匹配概况（票夹顶部流程导航：票夹 → 三单匹配 → 应付单） */
 export async function fetchMatchSummary(country: CountryCode): Promise<MatchSummary> {
   if (!isMock()) return http.get<MatchSummary>(`${countryBase(country)}/match/summary`);
   if (country !== MOCK_COUNTRY) {
@@ -489,23 +487,16 @@ export async function fetchMatchSummary(country: CountryCode): Promise<MatchSumm
       unmatchedInvoices: 0,
       pendingInbounds: 0,
       payables: 0,
-      drugs: 0,
-      drugRate: 0,
     });
   }
   const zones = { manual: 0, auto: 0, done: 0 };
   allGroups().forEach((g) => zones[cardModel(g, DEFAULT_TOLERANCE).zone]++);
-  drugCache ??= buildDrugMapping();
-  const spec = drugCache.drugs.reduce((a, d) => a + d.matCnt, 0);
-  const matched = drugCache.drugs.reduce((a, d) => a + d.matchedMatCnt, 0);
   return mockDelay({
     ...zones,
     drafts: mock.drafts.length,
     unmatchedInvoices: UNMATCHED_INVOICES,
     pendingInbounds: PENDING_INBOUNDS,
     payables: PAYABLES_BASE + mock.confirmed.size,
-    drugs: drugCache.drugs.length,
-    drugRate: spec ? Math.round((matched / spec) * 1000) / 10 : 0,
   });
 }
 
@@ -551,6 +542,8 @@ export function mockMatchWalletSuppliers(): WalletSupplier[] {
   });
   return [...out.values()];
 }
+
+let drugCache: DrugMapping | null = null;
 
 /** 药品匹配关系知识库：库存物料与供应商发票品规的匹配对及换算比例（向量化匹配的依据） */
 export async function fetchDrugMapping(country: CountryCode): Promise<DrugMapping> {

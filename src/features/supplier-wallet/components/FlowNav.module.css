@@ -1,12 +1,10 @@
-/* 供应商票夹流程导航：票夹 → 三单匹配 → 应付单 ┊ 药品匹配关系 */
+/* 供应商票夹流程导航：票夹 → 三单匹配 → 应付单 */
 .flow {
   min-width: 0;
 }
 .steps {
   display: grid;
-  grid-template-columns:
-    minmax(0, 1fr) 22px minmax(0, 1.35fr) 22px minmax(0, 0.85fr)
-    17px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1.4fr) 22px minmax(0, 1fr);
   align-items: stretch;
 }
 .step {
@@ -48,15 +46,6 @@
 }
 .primary.on {
   border-color: var(--accent);
-}
-
-/* 知识库：辅助入口 */
-.kb {
-  background: var(--wash);
-  border-style: dashed;
-}
-.kb.on {
-  border-style: solid;
 }
 
 .head {
@@ -149,22 +138,19 @@
   justify-content: center;
   color: var(--axis);
 }
-.sep {
-  justify-self: center;
-  width: 1px;
-  margin-block: 8px;
-  background: var(--line);
-}
-
-/* 窄屏：两列，隐藏箭头 */
+/* 窄屏：隐藏箭头；更窄时纵向排列 */
 @media (max-width: 960px) {
   .steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
   }
-  .arrow,
-  .sep {
+  .arrow {
     display: none;
+  }
+}
+@media (max-width: 640px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (prefers-reduced-motion: reduce) {

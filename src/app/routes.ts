@@ -16,8 +16,8 @@ export const ROUTES = {
   /** 影像查看器：在新窗口打开，不带应用框架 */
   invoiceViewer: (id = ':invoiceId') => `/viewer/${id}`,
   supplierWallet: '/pool/supplier-wallet',
-  /** 供应商票夹内的视图：三单匹配 / 应付单 / 药品匹配关系 */
-  supplierWalletView: (view: 'match' | 'ap' | 'drugs', q?: string) =>
+  /** 供应商票夹内的视图：三单匹配 / 应付单 */
+  supplierWalletView: (view: 'match' | 'ap', q?: string) =>
     `/pool/supplier-wallet?view=${view}${q ? `&q=${encodeURIComponent(q)}` : ''}`,
   /** 三单匹配 · 手工匹配工作台 */
   matchWorkbench: (id = ':groupId') => `/pool/supplier-wallet/match/${id}`,
@@ -39,6 +39,12 @@ export const ROUTES = {
   dataRecognition: '/data/recognition',
   dataCorrection: '/data/correction',
   dataRules: '/data/rules',
+  /** 三单匹配关系（药品品规匹配与换算知识库） */
+  dataMatchRelations: '/data/match-relations',
+  /** 匹配训练成果：q 预填供应商搜索 */
+  dataMatchTraining: (q?: string) => `/data/match-training${q ? `?q=${encodeURIComponent(q)}` : ''}`,
+  matchTrainingDetail: (code = ':supplierCode', country?: string) =>
+    `/data/match-training/${code}${country ? `?country=${country}` : ''}`,
 } as const;
 
 /**
@@ -179,6 +185,19 @@ export const NAV: NavGroup[] = [
         label: '数据识别规则管理',
         icon: 'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3',
         roles: ['data_ops'],
+      },
+      {
+        to: ROUTES.dataMatchRelations,
+        label: '三单匹配关系',
+        icon: 'M6 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM18 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM8 7h4a2 2 0 0 1 2 2v6a2 2 0 0 0 2 2M18 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4z',
+        roles: ['ap_clerk', 'data_ops'],
+      },
+      {
+        to: ROUTES.dataMatchTraining(),
+        label: '匹配训练成果',
+        icon: 'M12 3l9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4',
+        roles: ['data_ops'],
+        match: ['/data/match-training/'],
       },
     ],
   },

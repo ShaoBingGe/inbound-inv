@@ -62,7 +62,7 @@ docs/
 | 票池 · 企业票池 | `/pool/enterprise`（明细弹窗即生命周期） | invoice-pool |
 | 　发票全生命周期 | `/pool/invoices/:invoiceId` | invoice-lifecycle |
 | 　影像查看器（新窗口，无框架） | `/viewer/:invoiceId` | invoice-viewer |
-| 票池 · 供应商票夹 | `/pool/supplier-wallet`（页签：票夹 / 三单匹配 `?view=match` / 应付单 `?view=ap` / 药品匹配关系 `?view=drugs`） | supplier-wallet |
+| 票池 · 供应商票夹 | `/pool/supplier-wallet`（顶部流程导航：票夹 / 三单匹配 `?view=match` / 应付单 `?view=ap`） | supplier-wallet |
 | 　三单匹配 · 手工匹配工作台 | `/pool/supplier-wallet/match/:groupId` | supplier-wallet |
 | 采集 · H5页面采集 | `/capture/h5` | capture-h5 |
 | 采集 · 邮箱采集与识别 | `/capture/mailbox` | capture-mailbox |
@@ -76,6 +76,8 @@ docs/
 | 数据管理 · 发票识别数据管理看板 | `/data/recognition` | data-recognition |
 | 数据管理 · 发票数据修正 | `/data/correction` | data-correction |
 | 数据管理 · 数据识别规则管理 | `/data/rules` | data-rules |
+| 数据管理 · 三单匹配关系 | `/data/match-relations`（旧链接 `?view=drugs` 自动跳转） | match-relations |
+| 数据管理 · 匹配训练成果 | `/data/match-training`、`/data/match-training/:supplierCode` | match-training |
 
 ## 登录与权限
 

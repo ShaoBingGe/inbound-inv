@@ -604,7 +604,7 @@ function WorkbenchView({ initial }: { initial: Workbench }) {
             {t('销')}
           </span>
           <span translate="no">{initial.pairTo}</span>
-          <ButtonLink size="sm" className={s.trainLink} to={ROUTES.supplierWalletView('drugs')}>
+          <ButtonLink size="sm" className={s.trainLink} to={ROUTES.dataMatchTraining(initial.pairFrom)}>
             {t('查看历史数据训练情况')}
           </ButtonLink>
         </div>

@@ -33,6 +33,9 @@ const SkillDetail = page(() => import('@/features/skills/SkillDetailPage'));
 const DataRecognition = page(() => import('@/features/data-recognition/DataRecognitionPage'));
 const DataCorrection = page(() => import('@/features/data-correction/DataCorrectionPage'));
 const DataRules = page(() => import('@/features/data-rules/DataRulesPage'));
+const MatchRelations = page(() => import('@/features/match-relations/MatchRelationsPage'));
+const MatchTraining = page(() => import('@/features/match-training/MatchTrainingPage'));
+const MatchTrainingDetail = page(() => import('@/features/match-training/MatchTrainingDetailPage'));
 
 function guard(el: ReactNode, roles?: Role[]) {
   return <RequireRole roles={roles}>{el}</RequireRole>;
@@ -81,6 +84,9 @@ export const routes: RouteObject[] = [
       { path: ROUTES.dataRecognition, element: guard(<DataRecognition />, ['data_ops']) },
       { path: ROUTES.dataCorrection, element: guard(<DataCorrection />, ['ap_clerk', 'data_ops']) },
       { path: ROUTES.dataRules, element: guard(<DataRules />, ['data_ops']) },
+      { path: ROUTES.dataMatchRelations, element: guard(<MatchRelations />, ['ap_clerk', 'data_ops']) },
+      { path: ROUTES.dataMatchTraining(), element: guard(<MatchTraining />, ['data_ops']) },
+      { path: ROUTES.matchTrainingDetail(), element: guard(<MatchTrainingDetail />, ['data_ops']) },
       { path: ROUTES.forbidden, element: <ForbiddenPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],

@@ -3,11 +3,11 @@ import { Card, Chip, ErrorState, Input, Segmented, Select, Spinner } from '@/com
 import { useT } from '@/i18n';
 import { cx } from '@/lib/sample';
 import { useAsync } from '@/lib/useAsync';
-import type { CountryCode } from '../../types';
-import { fetchDrugMapping } from '../../match/api';
-import { DRUG_STATUS } from '../../match/data';
-import type { Drug, DrugEdge, DrugInv, DrugMat, DrugStatus } from '../../match/types';
-import { NoMatchData } from '../match/NoMatchData';
+import type { CountryCode } from '@/features/supplier-wallet/types';
+import { fetchDrugMapping } from '@/features/supplier-wallet/match/api';
+import { DRUG_STATUS } from '@/features/supplier-wallet/match/data';
+import type { Drug, DrugEdge, DrugInv, DrugMat, DrugStatus } from '@/features/supplier-wallet/match/types';
+import { NoMatchData } from '@/features/supplier-wallet/components/match/NoMatchData';
 import s from './drugs.module.css';
 
 type Kpi = 'all' | DrugStatus;

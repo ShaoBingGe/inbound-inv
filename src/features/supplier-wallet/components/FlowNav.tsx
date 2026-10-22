@@ -5,7 +5,7 @@ import { cx } from '@/lib/sample';
 import type { MatchSummary } from '../match/types';
 import s from './FlowNav.module.css';
 
-export type WalletView = 'wallet' | 'match' | 'ap' | 'drugs';
+export type WalletView = 'wallet' | 'match' | 'ap';
 
 export interface WalletStats {
   invoices: number;
@@ -15,7 +15,7 @@ export interface WalletStats {
 }
 
 /**
- * 供应商票夹的流程导航：票夹收票 → 三单匹配 → 应付单，药品匹配关系作为匹配的知识库。
+ * 供应商票夹的流程导航：票夹收票 → 三单匹配 → 应付单。
  * 每一步既是页签也是概况卡片，让三单匹配的入口和待处理量一眼可见。
  */
 export function FlowNav({
@@ -114,21 +114,6 @@ export function FlowNav({
             </span>
             <span className={s.sub}>{t('确认匹配或下推后生成，仅查询')}</span>
           </>,
-        )}
-        <span className={s.sep} aria-hidden="true" />
-        {step(
-          'drugs',
-          null,
-          '药品匹配关系',
-          <>
-            <span className={cx('num', s.metric)}>
-              {match ? match.drugs : dash} <small>{t('个物料')}</small> · {t('匹配率')}{' '}
-              {match ? `${match.drugRate}%` : dash}
-            </span>
-            <span className={s.sub}>{t('智能匹配（向量化）的品规与换算依据')}</span>
-          </>,
-          <Chip tone="gray">{t('知识库')}</Chip>,
-          s.kb,
         )}
       </div>
     </nav>

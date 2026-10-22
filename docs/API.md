@@ -64,7 +64,7 @@
 | POST | `/v1/supplier-wallet/invoices/{no}/rematch` | 业务 API |
 | GET | `/v1/supplier-wallet/overview` | 业务 API |
 
-### 三单匹配 / 应付单 / 药品匹配关系（`src/features/supplier-wallet/match/api.ts`）
+### 三单匹配 / 应付单 / 三单匹配关系（`src/features/supplier-wallet/match/api.ts`）
 
 查询都带国家（数据驻留）；过滤上下文（时间区间、购买入库组织、供应商）作为查询参数，前端不做本地过滤。
 
@@ -85,7 +85,17 @@
 | POST | `/v1/supplier-wallet/match-groups/{mg}/push` | 下推应付单，匹配组锁定 |
 | DELETE | `/v1/supplier-wallet/match-groups/{mg}` | 删除匹配组，明细行回到未匹配池 |
 | GET | `/v1/supplier-wallet/countries/{country}/payables` | 应付单查询（只读） |
-| GET | `/v1/supplier-wallet/countries/{country}/drug-mapping` | 药品匹配关系知识库 |
+| GET | `/v1/supplier-wallet/countries/{country}/drug-mapping` | 三单匹配关系（药品品规匹配与换算知识库，「数据管理 · 三单匹配关系」页使用） |
+
+## 匹配训练成果（`src/features/match-training`）
+
+训练与调度属于统一 agent 平台；本页只展示学习成果，并把「终止学习」写回后端，下一轮训练生效。
+
+| 方法 | 路径 | 说明 |
+|---|---|---|
+| GET | `/v1/match-training/countries/{country}/suppliers` | 按供应商的训练成果与更新时间 |
+| GET | `/v1/match-training/countries/{country}/suppliers/{code}` | 品名 → 规格 → 已学习发票，及已终止集合 |
+| PUT | `/v1/match-training/countries/{country}/suppliers/{code}/stopped` | 终止 / 恢复学习 `{keys, stopped}`，键为 `n:<品名>` 或 `s:<规格>` |
 
 ## H5页面采集（`src/features/capture-h5`）
 
