@@ -1,0 +1,32 @@
+[submodule "OCR/doc-ai"]
+	path = OCR/doc-ai
+	url = https://github.com/invagent/doc-ai.git
+	branch = test
+[submodule "OCR/doc-ai-frontend"]
+	path = OCR/doc-ai-frontend
+	url = https://github.com/invagent/doc-ai-frontend.git
+	branch = test
+[submodule "reference/invoice-inbound-core"]
+	path = reference/invoice-inbound-core
+	url = https://github.com/invagent/invoice-inbound-core.git
+	branch = test
+[submodule "reference/invoice-inbound-doc-data"]
+	path = reference/invoice-inbound-doc-data
+	url = https://github.com/invagent/invoice-inbound-doc-data.git
+	branch = test
+[submodule "reference/invoice-inbound-pool"]
+	path = reference/invoice-inbound-pool
+	url = https://github.com/invagent/invoice-inbound-pool.git
+	branch = test
+[submodule "reference/invoice-inbound-wallet"]
+	path = reference/invoice-inbound-wallet
+	url = https://github.com/invagent/invoice-inbound-wallet.git
+	branch = test
+[submodule "reference/invoice-inbound-ingress"]
+	path = reference/invoice-inbound-ingress
+	url = https://github.com/invagent/invoice-inbound-ingress.git
+	branch = test
+[submodule "reference/invoice-inbound-ledger-query"]
+	path = reference/invoice-inbound-ledger-query
+	url = https://github.com/invagent/invoice-inbound-ledger-query.git
+	branch = test
